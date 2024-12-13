@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private void initBottomNavBar(Bundle savedInstanceState) {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         // set home fragment as default
-        if (savedInstanceState != null) {
+        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, new HomeFragment())
                     .commit();
