@@ -7,4 +7,6 @@
     <string name="add_item_to_your_fridge">Artikel zu deinem Kühlschrank hinzufügen</string>
     <string name="expiring_food">Bald ablaufende Lebensmittel</string>
     <string name="expired_food">Abgelaufene Lebensmittel</string>
+    <string name="no_expiring_food">Keine Lebensmittel laufen bald ab.</string>
+    <string name="no_expired_food">Keine Lebensmittel sind abgelaufen.</string>
 </resources>

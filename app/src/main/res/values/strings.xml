@@ -6,4 +6,6 @@
     <string name="add_item_to_your_fridge">Add Item to your Fridge</string>
     <string name="expiring_food">Expiring food</string>
     <string name="expired_food">Expired food</string>
+    <string name="no_expiring_food">no expiring food.</string>
+    <string name="no_expired_food">no expired food.</string>
 </resources>

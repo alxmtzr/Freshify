@@ -81,10 +81,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="no expiring food"
+                    android:text="@string/no_expiring_food"
                     android:textSize="16sp"
-                    android:textColor="@color/md_theme_onTertiary"
-                    android:visibility="gone" />
+                    android:textColor="@color/md_theme_onTertiary"/>
+                <!--    android:visibility="gone" -->
+
             </androidx.cardview.widget.CardView>
 
 
@@ -129,10 +130,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="no expired food"
+                    android:text="@string/no_expired_food"
                     android:textSize="16sp"
-                    android:textColor="@color/md_theme_onError"
-                    android:visibility="gone" />
+                    android:textColor="@color/md_theme_onError" />
+                <!--    android:visibility="gone" -->
 
             </androidx.cardview.widget.CardView>
 
