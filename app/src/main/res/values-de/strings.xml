@@ -9,4 +9,9 @@
     <string name="expired_food">Abgelaufene Lebensmittel</string>
     <string name="no_expiring_food">Keine Lebensmittel laufen bald ab.</string>
     <string name="no_expired_food">Keine Lebensmittel sind abgelaufen.</string>
+    <string name="enter_expiry_date">Verfallsdatum eingeben</string>
+    <string name="choose_a_category">Kategorie auswählen</string>
+    <string name="item_name">Lebensmittel Name</string>
+    <string name="comment">Kommentar</string>
+    <string name="save_item">Speichern</string>
 </resources>

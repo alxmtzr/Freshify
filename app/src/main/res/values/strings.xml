@@ -8,4 +8,9 @@
     <string name="expired_food">Expired food</string>
     <string name="no_expiring_food">no expiring food.</string>
     <string name="no_expired_food">no expired food.</string>
+    <string name="enter_expiry_date">Enter expiry date</string>
+    <string name="choose_a_category">Choose a category</string>
+    <string name="item_name">Item name</string>
+    <string name="comment">Comment</string>
+    <string name="save_item">Save item</string>
 </resources>
