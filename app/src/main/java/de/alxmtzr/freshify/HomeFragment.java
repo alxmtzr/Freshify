@@ -17,6 +17,9 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Calendar;
 
+import de.alxmtzr.freshify.data.local.CategoryDatabase;
+import de.alxmtzr.freshify.data.local.impl.CategoryDatabaseImpl;
+
 public class HomeFragment extends Fragment {
 
     public HomeFragment() {
@@ -35,7 +38,8 @@ public class HomeFragment extends Fragment {
         AutoCompleteTextView dropdownMenu = view.findViewById(R.id.categoryDropdownMenu);
 
         // data source for categories
-        String[] items = new String[]{"Option 1", "Option 2", "Option 3"};
+        CategoryDatabase categoryDatabase = new CategoryDatabaseImpl(getContext());
+        String[] items = categoryDatabase.getCategories().toArray(new String[0]);
 
         // create adapter
         ArrayAdapter<String> adapter = new ArrayAdapter<>(

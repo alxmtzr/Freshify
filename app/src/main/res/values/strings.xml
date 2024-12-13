@@ -14,4 +14,16 @@
     <string name="comment">Comment</string>
     <string name="save_item">Save item</string>
     <string name="freshify" translatable="false">freshify</string>
+    <string name="category_fruits_vegetables">Fruits and Vegetables</string>
+    <string name="category_dairy_alternatives">Dairy and Alternatives</string>
+    <string name="category_meat_fish_alternatives">Meat, Fish, and Alternatives</string>
+    <string name="category_drinks">Drinks</string>
+    <string name="category_prepared_meals">Prepared Meals</string>
+    <string name="category_sauces_dips_spreads">Sauces, Dips, and Spreads</string>
+    <string name="category_bakery_dough">Bakery and Dough Items</string>
+    <string name="category_snacks_sweets">Snacks and Sweets</string>
+    <string name="category_frozen_items">Frozen Items</string>
+    <string name="category_canned_non_perishable">Canned and Non-Perishable Goods</string>
+    <string name="category_spices_herbs_ingredients">Spices, Herbs, and Ingredients</string>
+    <string name="category_miscellaneous">Miscellaneous</string>
 </resources>

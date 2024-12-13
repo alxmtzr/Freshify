@@ -14,4 +14,16 @@
     <string name="item_name">Lebensmittel Name</string>
     <string name="comment">Kommentar</string>
     <string name="save_item">Speichern</string>
+    <string name="category_fruits_vegetables">Obst und Gemüse</string>
+    <string name="category_dairy_alternatives">Milchprodukte und Alternativen</string>
+    <string name="category_meat_fish_alternatives">Fleisch, Fisch und Alternativen</string>
+    <string name="category_drinks">Getränke</string>
+    <string name="category_prepared_meals">Zubereitete Speisen</string>
+    <string name="category_sauces_dips_spreads">Soßen, Dips und Aufstriche</string>
+    <string name="category_bakery_dough">Backwaren und Teigwaren</string>
+    <string name="category_snacks_sweets">Snacks und Süßigkeiten</string>
+    <string name="category_frozen_items">Tiefgekühltes</string>
+    <string name="category_canned_non_perishable">Konserven und haltbare Produkte</string>
+    <string name="category_spices_herbs_ingredients">Gewürze, Kräuter und Zutaten</string>
+    <string name="category_miscellaneous">Sonstiges</string>
 </resources>
