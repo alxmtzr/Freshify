@@ -13,4 +13,5 @@
     <string name="item_name">Item name</string>
     <string name="comment">Comment</string>
     <string name="save_item">Save item</string>
+    <string name="freshify" translatable="false">freshify</string>
 </resources>

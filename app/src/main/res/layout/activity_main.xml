@@ -18,7 +18,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/app_name"
+        app:title="@string/freshify"
+        app:titleCentered="true"
         app:titleTextColor="@color/md_theme_onPrimaryContainer" />
 
     <!-- Fragment Container -->
