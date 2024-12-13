@@ -36,13 +36,65 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginTop="8dp"
-                app:cardBackgroundColor="@color/md_theme_secondary"
+                app:cardBackgroundColor="@color/md_theme_secondaryContainer"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_percent="0.4"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/addItemLabel" />
+                app:layout_constraintTop_toBottomOf="@id/addItemLabel" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <!-- text field item name -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:hint="Item name">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/itemNameEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- category -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Choose a category"
+                        android:layout_margin="16dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/categoryDropdownMenu"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <!-- Expiry Date Input Field -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:hint="Enter expiry date">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/expiryDateEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:inputType="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
 
             <!-- expiring food card Label -->
@@ -69,7 +121,7 @@
                 android:layout_marginTop="8dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="16dp"
-                app:cardBackgroundColor="@color/md_theme_tertiary"
+                app:cardBackgroundColor="@color/md_theme_tertiaryContainer"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/expiringFoodLabel"
@@ -84,7 +136,7 @@
                     android:text="@string/no_expiring_food"
                     android:layout_margin="16dp"
                     android:textSize="16sp"
-                    android:textColor="@color/md_theme_onTertiary"/>
+                    android:textColor="@color/md_theme_onTertiaryContainer"/>
                 <!--    android:visibility="gone" -->
 
             </androidx.cardview.widget.CardView>
@@ -118,7 +170,7 @@
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="16dp"
-                app:cardBackgroundColor="@color/md_theme_error"
+                app:cardBackgroundColor="@color/md_theme_errorContainer"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/expiredFoodLabel"
@@ -134,7 +186,7 @@
                     android:layout_margin="16dp"
                     android:text="@string/no_expired_food"
                     android:textSize="16sp"
-                    android:textColor="@color/md_theme_onError" />
+                    android:textColor="@color/md_theme_onErrorContainer" />
                 <!--    android:visibility="gone" -->
 
             </androidx.cardview.widget.CardView>
