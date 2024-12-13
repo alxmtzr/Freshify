@@ -1,8 +1,11 @@
 package de.alxmtzr.freshify;
 
 import android.os.Bundle;
+import android.view.Window;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -14,7 +17,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initToolbar();
         initBottomNavBar(savedInstanceState);
+    }
+
+    private void initToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // set status bar color
+        Window window = getWindow();
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.md_theme_primaryContainer));
     }
 
     private void initBottomNavBar(Bundle savedInstanceState) {
