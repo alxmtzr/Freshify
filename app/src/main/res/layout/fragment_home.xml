@@ -81,22 +81,40 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
 
-                    <!-- Expiry Date Input Field -->
-                    <com.google.android.material.textfield.TextInputLayout
+                    <!-- expiry date -->
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
                         android:layout_marginTop="8dp"
-                        android:hint="@string/enter_expiry_date">
+                        android:orientation="horizontal">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/expiryDateEditText"
-                            android:layout_width="match_parent"
+                        <!-- Expiry Date Input Field -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:focusable="false"
-                            android:inputType="none" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            android:layout_weight="1"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="8dp"
+                            android:hint="@string/enter_expiry_date">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/expiryDateEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:focusable="false"
+                                android:inputType="none" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!-- Web Search Button -->
+                        <ImageButton
+                            android:id="@+id/webSearchIcon"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/ic_search_web"
+                            android:layout_marginEnd="16dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:layout_gravity="center_vertical" />
+                    </LinearLayout>
+
 
                     <!-- comment text Field -->
                     <com.google.android.material.textfield.TextInputLayout
