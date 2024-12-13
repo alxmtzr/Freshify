@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">Freshify</string>
+    <string name="home">Zuhause</string>
+    <string name="my_fridge">Mein Kühlschrank</string>
+    <string name="settings">Einstellungen</string>
+</resources>
