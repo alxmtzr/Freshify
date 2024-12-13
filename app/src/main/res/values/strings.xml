@@ -3,4 +3,7 @@
     <string name="home">Home</string>
     <string name="my_fridge">My Fridge</string>
     <string name="settings">Settings</string>
+    <string name="add_item_to_your_fridge">Add Item to your Fridge</string>
+    <string name="expiring_food">Expiring food</string>
+    <string name="expired_food">Expired food</string>
 </resources>

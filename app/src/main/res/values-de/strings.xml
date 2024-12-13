@@ -4,4 +4,7 @@
     <string name="home">Zuhause</string>
     <string name="my_fridge">Mein Kühlschrank</string>
     <string name="settings">Einstellungen</string>
+    <string name="add_item_to_your_fridge">Artikel zu deinem Kühlschrank hinzufügen</string>
+    <string name="expiring_food">Bald ablaufende Lebensmittel</string>
+    <string name="expired_food">Abgelaufene Lebensmittel</string>
 </resources>
