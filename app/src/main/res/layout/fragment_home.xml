@@ -63,7 +63,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/expiringCardView"
                 android:layout_width="0dp"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginTop="8dp"
@@ -82,6 +82,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/no_expiring_food"
+                    android:layout_margin="16dp"
                     android:textSize="16sp"
                     android:textColor="@color/md_theme_onTertiary"/>
                 <!--    android:visibility="gone" -->
@@ -110,7 +111,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/expiredCardView"
                 android:layout_width="0dp"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginTop="8dp"
@@ -130,6 +131,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_margin="16dp"
                     android:text="@string/no_expired_food"
                     android:textSize="16sp"
                     android:textColor="@color/md_theme_onError" />
