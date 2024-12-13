@@ -73,7 +73,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/expiringFoodLabel"
-                app:layout_constraintHeight_percent="0.3" />
+                app:layout_constraintHeight_percent="0.3" >
+
+                <!-- Placeholder TextView -->
+                <TextView
+                    android:id="@+id/noExpiringFoodText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="no expiring food"
+                    android:textSize="16sp"
+                    android:textColor="@color/md_theme_onTertiary"
+                    android:visibility="gone" />
+            </androidx.cardview.widget.CardView>
 
 
             <!-- expired food card Label -->
@@ -109,7 +121,20 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/expiredFoodLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHeight_percent="0.3" />
+                app:layout_constraintHeight_percent="0.3" >
+
+                <!-- Placeholder TextView -->
+                <TextView
+                    android:id="@+id/noExpiredFoodText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="no expired food"
+                    android:textSize="16sp"
+                    android:textColor="@color/md_theme_onError"
+                    android:visibility="gone" />
+
+            </androidx.cardview.widget.CardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
