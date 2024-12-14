@@ -1,7 +1,6 @@
 package de.alxmtzr.freshify;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Window;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,15 +9,6 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
-import de.alxmtzr.freshify.data.local.FreshifyRepository;
-import de.alxmtzr.freshify.data.local.impl.FreshifyDBHelper;
-import de.alxmtzr.freshify.data.local.impl.FreshifyRepositoryImpl;
-import de.alxmtzr.freshify.data.model.ItemEntity;
 
 public class MainActivity extends AppCompatActivity {
 
