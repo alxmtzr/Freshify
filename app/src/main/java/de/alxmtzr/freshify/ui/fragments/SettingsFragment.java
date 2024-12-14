@@ -1,4 +1,4 @@
-package de.alxmtzr.freshify;
+package de.alxmtzr.freshify.ui.fragments;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import de.alxmtzr.freshify.R;
 
 /**
  * A simple {@link Fragment} subclass.

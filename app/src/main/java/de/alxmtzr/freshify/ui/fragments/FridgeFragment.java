@@ -1,4 +1,4 @@
-package de.alxmtzr.freshify;
+package de.alxmtzr.freshify.ui.fragments;
 
 import android.os.Bundle;
 
@@ -20,6 +20,7 @@ import com.google.android.material.chip.ChipGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.alxmtzr.freshify.R;
 import de.alxmtzr.freshify.adapter.ItemsAdapter;
 import de.alxmtzr.freshify.data.local.CategoryDatabase;
 import de.alxmtzr.freshify.data.local.FreshifyRepository;

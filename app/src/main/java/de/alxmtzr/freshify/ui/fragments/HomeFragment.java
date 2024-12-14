@@ -1,4 +1,4 @@
-package de.alxmtzr.freshify;
+package de.alxmtzr.freshify.ui.fragments;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
@@ -21,6 +21,7 @@ import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Objects;
 
+import de.alxmtzr.freshify.R;
 import de.alxmtzr.freshify.data.local.CategoryDatabase;
 import de.alxmtzr.freshify.data.local.FreshifyRepository;
 import de.alxmtzr.freshify.data.local.impl.CategoryDatabaseImpl;

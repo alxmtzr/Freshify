@@ -1,4 +1,4 @@
-package de.alxmtzr.freshify;
+package de.alxmtzr.freshify.ui;
 
 import android.os.Bundle;
 import android.view.Window;
@@ -14,10 +14,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.alxmtzr.freshify.R;
 import de.alxmtzr.freshify.data.local.FreshifyRepository;
 import de.alxmtzr.freshify.data.local.impl.FreshifyDBHelper;
 import de.alxmtzr.freshify.data.local.impl.FreshifyRepositoryImpl;
 import de.alxmtzr.freshify.data.model.ItemEntity;
+import de.alxmtzr.freshify.ui.fragments.FridgeFragment;
+import de.alxmtzr.freshify.ui.fragments.HomeFragment;
+import de.alxmtzr.freshify.ui.fragments.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
