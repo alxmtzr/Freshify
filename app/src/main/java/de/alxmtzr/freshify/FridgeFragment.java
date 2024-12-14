@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -60,11 +61,45 @@ public class FridgeFragment extends Fragment {
         itemsAdapter = new ItemsAdapter(new ArrayList<>());
         itemsRecyclerView.setAdapter(itemsAdapter);
 
+        initSearchView(view);
         initCategoryChips(view);
 
         // load all items at start
         resetFilter();
     }
+
+    private void initSearchView(View view) {
+        SearchView searchView = view.findViewById(R.id.searchItemView);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // filter items by search text
+                if (newText.isEmpty()) {
+                    resetFilter(); // show all items
+                } else {
+                    searchItems(newText); // search based on item name
+                }
+                return true;
+            }
+        });
+    }
+
+    private void searchItems(String query) {
+        // search items by name
+        List<ItemEntity> searchedItems = repository.getItemsByName(query);
+
+        // refresh recycler view
+        itemsAdapter.updateItems(searchedItems);
+
+        Log.i("FridgeFragment", "Search result for: " + query + " - " + searchedItems.size() + " items found.");
+    }
+
 
     private void initCategoryChips(View view) {
         ChipGroup catgegoryChipGroup = view.findViewById(R.id.categoryChipGroup);
