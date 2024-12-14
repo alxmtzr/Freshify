@@ -32,4 +32,6 @@
     <string name="invalid_expiry_date_format">Ungültiges Verfallsdatumsformat</string>
     <string name="item_saved_successfully">Artikel erfolgreich gespeichert!</string>
     <string name="failed_to_save_item">Fehler beim Speichern des Artikels</string>
+    <string name="category">Kategorie</string>
+    <string name="expiry_date">Verfallsdatum</string>
 </resources>

@@ -32,4 +32,6 @@
     <string name="invalid_expiry_date_format">Invalid expiry date format</string>
     <string name="item_saved_successfully">Item saved successfully!</string>
     <string name="failed_to_save_item">Failed to save item</string>
+    <string name="category">category</string>
+    <string name="expiry_date">Expiry Date</string>
 </resources>

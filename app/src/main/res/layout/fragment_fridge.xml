@@ -33,13 +33,6 @@
             android:orientation="vertical">
 
             <!-- TODO: **HORIZONTALE** RecyclerView für Kategorien mit FILTER CHIPS -->
-<!--            <androidx.recyclerview.widget.RecyclerView-->
-<!--                android:id="@+id/categoriesRecyclerView"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_margin="8dp"-->
-<!--                android:orientation="horizontal" />-->
-
             <!-- ChipGroup für Filter -->
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/categoryChipGroup"
