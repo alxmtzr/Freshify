@@ -1,6 +1,7 @@
 package de.alxmtzr.freshify;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +10,13 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.List;
+
+import de.alxmtzr.freshify.data.local.FreshifyRepository;
+import de.alxmtzr.freshify.data.local.impl.FreshifyDBHelper;
+import de.alxmtzr.freshify.data.local.impl.FreshifyRepositoryImpl;
+import de.alxmtzr.freshify.data.model.ItemEntity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,6 +27,22 @@ public class MainActivity extends AppCompatActivity {
 
         initToolbar();
         initBottomNavBar(savedInstanceState);
+
+        FreshifyDBHelper dbHelper = new FreshifyDBHelper(this);
+        FreshifyRepository repository = new FreshifyRepositoryImpl(dbHelper);
+
+        List<ItemEntity> items = repository.getAllItems();
+
+        for (ItemEntity item : items) {
+            Log.i("Stored item: ",
+                    "ID: " + item.getId()
+                            + ", Name: " + item.getName()
+                            + ", Category ID: " + item.getCategoryId()
+                            + ", Category: " + item.getCategoryName()
+                            + ", Quantity: " + item.getQuantity()
+                            + ", Expiry Date: " + item.getExpiryDate()
+                            + ", Comment: " + item.getComment());
+        }
     }
 
     private void initToolbar() {
