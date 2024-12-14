@@ -46,15 +46,16 @@ public class FridgeFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        RecyclerView itemsRecyclerView;
         super.onViewCreated(view, savedInstanceState);
 
+        // initialize database
         FreshifyDBHelper dbHelper = new FreshifyDBHelper(getContext());
         repository = new FreshifyRepositoryImpl(dbHelper);
 
+        // initialize RecyclerView
+        RecyclerView itemsRecyclerView;
         itemsRecyclerView = view.findViewById(R.id.itemsRecyclerView);
         itemsRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-
         // Adapter
         itemsAdapter = new ItemsAdapter(new ArrayList<>());
         itemsRecyclerView.setAdapter(itemsAdapter);
