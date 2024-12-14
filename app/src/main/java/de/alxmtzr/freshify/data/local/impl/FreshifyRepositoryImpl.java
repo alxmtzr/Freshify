@@ -21,6 +21,20 @@ public class FreshifyRepositoryImpl implements FreshifyRepository {
     }
 
     @Override
+    public long deleteItem(long itemId) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        long deletedRows = db.delete(
+                FreshifyDBHelper.FRESHIFY_TABLE,
+                BaseColumns._ID + " = ?",
+                new String[]{String.valueOf(itemId)}
+        );
+
+        db.close();
+        return deletedRows;
+    }
+
+    @Override
     public long insertItem(ItemEntity item) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
