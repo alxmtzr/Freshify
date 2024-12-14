@@ -1,5 +1,6 @@
 package de.alxmtzr.freshify.data.local.impl;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.BaseColumns;
@@ -18,6 +19,25 @@ public class FreshifyRepositoryImpl implements FreshifyRepository {
 
     public FreshifyRepositoryImpl(FreshifyDBHelper dbHelper) {
         this.dbHelper = dbHelper;
+    }
+
+    @Override
+    public long insertItem(ItemEntity item) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(BaseColumns._ID, item.getId());
+        values.put(FreshifyDBHelper.FRESHIFY_COL_ITEM_NAME, item.getName());
+        values.put(FreshifyDBHelper.FRESHIFY_COL_ITEM_QUANTITY, item.getQuantity());
+        values.put(FreshifyDBHelper.FRESHIFY_COL_ITEM_CATEGORY_ID, item.getCategoryId());
+        values.put(FreshifyDBHelper.FRESHIFY_COL_ITEM_CATEGORY_NAME, item.getCategoryName());
+        values.put(FreshifyDBHelper.FRESHIFY_COL_ITEM_EXPIRY_DATE, item.getExpiryDate().toString()); // convert LocalDate to String
+        values.put(FreshifyDBHelper.FRESHIFY_COL_COMMENT, item.getComment());
+
+        long newRowId = db.insert(FreshifyDBHelper.FRESHIFY_TABLE, null, values);
+
+        db.close(); // Schließe die Verbindung zur Datenbank
+        return newRowId; // Gibt die ID der neuen Zeile zurück (oder -1, wenn das Einfügen fehlschlägt)
     }
 
     @Override

@@ -7,6 +7,14 @@ import de.alxmtzr.freshify.data.model.ItemEntity;
 public interface FreshifyRepository {
 
     /**
+     * Inserts a new item into the database.
+     *
+     * @param item the item to insert.
+     * @return the ID of the newly inserted item.
+     */
+    long insertItem(ItemEntity item);
+
+    /**
      * Retrieves all items from the database.
      *
      * @return a list of all items.
