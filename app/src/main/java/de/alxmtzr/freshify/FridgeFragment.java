@@ -31,6 +31,7 @@ public class FridgeFragment extends Fragment {
 
     private FreshifyRepository repository;
     private ItemsAdapter itemsAdapter;
+    private final List<Integer> selectedCategoryIds = new ArrayList<>();
 
     public FridgeFragment() {
         // Required empty public constructor
@@ -73,29 +74,38 @@ public class FridgeFragment extends Fragment {
             Chip chip = new Chip(requireContext());
             chip.setText(category);
             chip.setCheckable(true);
+
+            // event for check status of chip
             chip.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                // filter items by category
+                int categoryId = categoryDatabase.getIdByCategory(category);
+                // add or remove category id from selectedCategoryIds
                 if (isChecked) {
-                    filterItemsByCategory(categoryDatabase, category);
+                    selectedCategoryIds.add(categoryId);
                 } else {
-                    resetFilter();
+                    selectedCategoryIds.remove(categoryId);
                 }
+
+                // filter items by selected categories
+                filterItemsByCategory();
             });
 
             catgegoryChipGroup.addView(chip);
         }
     }
 
-    private void filterItemsByCategory(CategoryDatabase categoryDatabase, String categoryName) {
-        int categoryId = categoryDatabase.getIdByCategory(categoryName);
+    private void filterItemsByCategory() {
+        if (selectedCategoryIds.isEmpty()) {
+            // no filter -> show all items
+            resetFilter();
+        } else {
+            // show items with selected categories
+            List<ItemEntity> filteredItems = repository.getItemsByCategories(selectedCategoryIds);
+            itemsAdapter.updateItems(filteredItems);
 
-        // get items by category from database
-        List<ItemEntity> filteredItems = repository.getItemsByCategories(List.of(categoryId));
-
-        // Adapter aktualisieren
-        itemsAdapter.updateItems(filteredItems);
-
-        Toast.makeText(requireContext(), "Filtered by: " + categoryName, Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(),
+                    "Filtered by " + selectedCategoryIds.size() + " categories",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void resetFilter() {

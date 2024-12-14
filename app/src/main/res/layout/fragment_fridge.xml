@@ -34,16 +34,26 @@
 
             <!-- TODO: **HORIZONTALE** RecyclerView für Kategorien mit FILTER CHIPS -->
             <!-- ChipGroup für Filter -->
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/categoryChipGroup"
+            <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:singleSelection="true"
-                app:selectionRequired="false"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
-                android:orientation="horizontal"
-                app:chipSpacingHorizontal="8dp"
-                app:chipSpacingVertical="4dp" />
+                android:scrollbars="none">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/categoryChipGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="false"
+                    app:selectionRequired="false"
+                    app:chipSpacingHorizontal="8dp"
+                    app:chipSpacingVertical="4dp"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
+
 
             <!-- Vertikale RecyclerView für Artikel -->
             <androidx.recyclerview.widget.RecyclerView
