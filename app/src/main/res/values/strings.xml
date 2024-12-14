@@ -34,4 +34,6 @@
     <string name="failed_to_save_item">Failed to save item</string>
     <string name="category">category</string>
     <string name="expiry_date">Expiry Date</string>
+    <string name="delete_item">delete item</string>
+    <string name="expiring">expiring</string>
 </resources>

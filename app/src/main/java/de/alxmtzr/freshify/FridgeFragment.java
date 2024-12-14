@@ -8,10 +8,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -61,6 +61,8 @@ public class FridgeFragment extends Fragment {
 
         initCategoryChips(view);
 
+        // load all items at start
+        resetFilter();
     }
 
     private void initCategoryChips(View view) {
@@ -82,7 +84,9 @@ public class FridgeFragment extends Fragment {
                 if (isChecked) {
                     selectedCategoryIds.add(categoryId);
                 } else {
-                    selectedCategoryIds.remove(categoryId);
+                    if (selectedCategoryIds.contains(categoryId)) {
+                        selectedCategoryIds.remove(Integer.valueOf(categoryId));
+                    }
                 }
 
                 // filter items by selected categories
@@ -102,9 +106,7 @@ public class FridgeFragment extends Fragment {
             List<ItemEntity> filteredItems = repository.getItemsByCategories(selectedCategoryIds);
             itemsAdapter.updateItems(filteredItems);
 
-            Toast.makeText(requireContext(),
-                    "Filtered by " + selectedCategoryIds.size() + " categories",
-                    Toast.LENGTH_SHORT).show();
+            Log.i("FridgeFragment", "Filtered by " + selectedCategoryIds.size() + " categories");
         }
     }
 
@@ -115,6 +117,9 @@ public class FridgeFragment extends Fragment {
         // refresh adapter
         itemsAdapter.updateItems(allItems);
 
-        Toast.makeText(requireContext(), "Filter reset", Toast.LENGTH_SHORT).show();
+        // clear selected categories (filter)
+        selectedCategoryIds.clear();
+
+        Log.i("FridgeFragment", "Filter reset");
     }
 }

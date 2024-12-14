@@ -34,4 +34,6 @@
     <string name="failed_to_save_item">Fehler beim Speichern des Artikels</string>
     <string name="category">Kategorie</string>
     <string name="expiry_date">Verfallsdatum</string>
+    <string name="delete_item">delete item</string>
+    <string name="expiring">expiring</string>
 </resources>

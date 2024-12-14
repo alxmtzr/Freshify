@@ -31,10 +31,13 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         ItemEntity item = items.get(position);
+
+        // Set the item's data to the view
         holder.itemName.setText(item.getName());
         holder.itemQuantity.setText(String.valueOf(item.getQuantity()));
         holder.itemCategory.setText(item.getCategoryName());
         holder.itemExpiryDate.setText(item.getExpiryDate().toString());
+
     }
 
     @Override
