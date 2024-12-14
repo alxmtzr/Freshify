@@ -1,7 +1,6 @@
 package de.alxmtzr.freshify;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Window;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,7 +10,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.List;
+import java.time.LocalDate;
 
 import de.alxmtzr.freshify.data.local.FreshifyRepository;
 import de.alxmtzr.freshify.data.local.impl.FreshifyDBHelper;
@@ -28,21 +27,135 @@ public class MainActivity extends AppCompatActivity {
         initToolbar();
         initBottomNavBar(savedInstanceState);
 
+//        insertTestData();
+    }
+
+    // only for testing purposes
+    private void insertTestData() {
         FreshifyDBHelper dbHelper = new FreshifyDBHelper(this);
         FreshifyRepository repository = new FreshifyRepositoryImpl(dbHelper);
 
-        List<ItemEntity> items = repository.getAllItems();
+        // test data
+        repository.insertItem(new ItemEntity(
+                0,
+                "Apple",
+                5,
+                1,
+                "Fruits & Vegetables",
+                LocalDate.of(2024, 12, 31),
+                "Fresh and juicy apples"
+        ));
 
-        for (ItemEntity item : items) {
-            Log.i("Stored item: ",
-                    "ID: " + item.getId()
-                            + ", Name: " + item.getName()
-                            + ", Category ID: " + item.getCategoryId()
-                            + ", Category: " + item.getCategoryName()
-                            + ", Quantity: " + item.getQuantity()
-                            + ", Expiry Date: " + item.getExpiryDate()
-                            + ", Comment: " + item.getComment());
-        }
+        repository.insertItem(new ItemEntity(
+                0,
+                "Milk",
+                2,
+                2,
+                "Dairy Alternatives",
+                LocalDate.of(2024, 12, 25),
+                "Low-fat organic milk"
+        ));
+
+        repository.insertItem(new ItemEntity(
+                0,
+                "Chicken Breast",
+                3,
+                3,
+                "Meat & Fish Alternatives",
+                LocalDate.of(2024, 12, 20),
+                "Fresh chicken, ready to cook"
+        ));
+
+        repository.insertItem(new ItemEntity(
+                0,
+                "Orange Juice",
+                1,
+                4,
+                "Drinks",
+                LocalDate.of(2024, 12, 15),
+                "No added sugar"
+        ));
+
+        repository.insertItem(new ItemEntity(
+                0,
+                "Lasagna",
+                1,
+                5,
+                "Prepared Meals",
+                LocalDate.of(2024, 12, 18),
+                "Frozen lasagna for easy dinner"
+        ));
+
+        repository.insertItem(new ItemEntity(
+                0,
+                "Ketchup",
+                1,
+                6,
+                "Sauces, Dips & Spreads",
+                LocalDate.of(2025, 1, 10),
+                "Classic tomato ketchup"
+        ));
+
+        repository.insertItem(new ItemEntity(
+                0,
+                "Bread Dough",
+                2,
+                7,
+                "Bakery & Dough",
+                LocalDate.of(2024, 12, 22),
+                "Ready-to-bake dough"
+        ));
+
+        repository.insertItem(new ItemEntity(
+                0,
+                "Chocolate Bar",
+                10,
+                8,
+                "Snacks & Sweets",
+                LocalDate.of(2025, 2, 15),
+                "Dark chocolate, 70% cocoa"
+        ));
+
+        repository.insertItem(new ItemEntity(
+                0,
+                "Frozen Peas",
+                3,
+                9,
+                "Frozen Items",
+                LocalDate.of(2025, 6, 1),
+                "Great for quick meals"
+        ));
+
+        repository.insertItem(new ItemEntity(
+                0,
+                "Canned Beans",
+                4,
+                10,
+                "Canned & Non-Perishable",
+                LocalDate.of(2025, 12, 31),
+                "High in protein"
+        ));
+
+        repository.insertItem(new ItemEntity(
+                0,
+                "Paprika Powder",
+                1,
+                11,
+                "Spices, Herbs & Ingredients",
+                LocalDate.of(2026, 5, 10),
+                "Perfect for stews"
+        ));
+
+        repository.insertItem(new ItemEntity(
+                0,
+                "Aluminum Foil",
+                1,
+                12,
+                "Miscellaneous",
+                LocalDate.of(2028, 12, 31),
+                "Useful for food storage"
+        ));
+
     }
 
     private void initToolbar() {
