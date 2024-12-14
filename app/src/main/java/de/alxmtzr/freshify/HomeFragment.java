@@ -63,7 +63,7 @@ public class HomeFragment extends Fragment {
 
             // show toast if required fields are empty
             if (itemName.isEmpty() || itemQuantityStr.isEmpty() || expiryDateStr.isEmpty() || category.isEmpty()) {
-                Toast.makeText(requireContext(), "Please fill in all required fields", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), getString(R.string.please_fill_in_all_required_fields), Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
             try {
                 itemQuantity = Integer.parseInt(itemQuantityStr);
             } catch (NumberFormatException e) {
-                Toast.makeText(requireContext(), "Invalid quantity", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), getString(R.string.invalid_quantity), Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -85,7 +85,7 @@ public class HomeFragment extends Fragment {
                 int year = Integer.parseInt(dateParts[2]);
                 expiryDate = LocalDate.of(year, month, day);
             } catch (Exception e) {
-                Toast.makeText(requireContext(), "Invalid expiry date format", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), getString(R.string.invalid_expiry_date_format), Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -105,10 +105,10 @@ public class HomeFragment extends Fragment {
             FreshifyRepository repository = new FreshifyRepositoryImpl(dbHelper);
             long newRowId = repository.insertItem(newItem);
             if (newRowId != -1) {
-                Toast.makeText(requireContext(), "Item saved successfully!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), getString(R.string.item_saved_successfully), Toast.LENGTH_SHORT).show();
                 clearInputFields(view); // clear input fields
             } else {
-                Toast.makeText(requireContext(), "Failed to save item", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), getString(R.string.failed_to_save_item), Toast.LENGTH_SHORT).show();
             }
         });
     }

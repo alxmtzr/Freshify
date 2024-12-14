@@ -27,4 +27,9 @@
     <string name="category_spices_herbs_ingredients">Gewürze, Kräuter und Zutaten</string>
     <string name="category_miscellaneous">Sonstiges</string>
     <string name="quantity">Anzahl</string>
+    <string name="please_fill_in_all_required_fields">Bitte füllen Sie alle erforderlichen Felder aus</string>
+    <string name="invalid_quantity">Ungültige Menge</string>
+    <string name="invalid_expiry_date_format">Ungültiges Verfallsdatumsformat</string>
+    <string name="item_saved_successfully">Artikel erfolgreich gespeichert!</string>
+    <string name="failed_to_save_item">Fehler beim Speichern des Artikels</string>
 </resources>

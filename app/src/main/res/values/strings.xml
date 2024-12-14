@@ -27,4 +27,9 @@
     <string name="category_spices_herbs_ingredients">Spices, Herbs, and Ingredients</string>
     <string name="category_miscellaneous">Miscellaneous</string>
     <string name="quantity">quantity</string>
+    <string name="please_fill_in_all_required_fields">Please fill in all required fields</string>
+    <string name="invalid_quantity">Invalid quantity</string>
+    <string name="invalid_expiry_date_format">Invalid expiry date format</string>
+    <string name="item_saved_successfully">Item saved successfully!</string>
+    <string name="failed_to_save_item">Failed to save item</string>
 </resources>
