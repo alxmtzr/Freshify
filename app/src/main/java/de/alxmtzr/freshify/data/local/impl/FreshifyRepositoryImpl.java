@@ -64,7 +64,7 @@ public class FreshifyRepositoryImpl implements FreshifyRepository {
                 null,
                 null,
                 null,
-                null
+                FreshifyDBHelper.FRESHIFY_COL_ITEM_NAME + " ASC"  // sort by name
         );
 
         if (cursor != null) {
