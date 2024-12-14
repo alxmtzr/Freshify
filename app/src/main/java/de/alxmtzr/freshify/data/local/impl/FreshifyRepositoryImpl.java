@@ -7,7 +7,6 @@ import android.provider.BaseColumns;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import de.alxmtzr.freshify.data.local.FreshifyRepository;
@@ -26,7 +25,6 @@ public class FreshifyRepositoryImpl implements FreshifyRepository {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(BaseColumns._ID, item.getId());
         values.put(FreshifyDBHelper.FRESHIFY_COL_ITEM_NAME, item.getName());
         values.put(FreshifyDBHelper.FRESHIFY_COL_ITEM_QUANTITY, item.getQuantity());
         values.put(FreshifyDBHelper.FRESHIFY_COL_ITEM_CATEGORY_ID, item.getCategoryId());
@@ -36,13 +34,13 @@ public class FreshifyRepositoryImpl implements FreshifyRepository {
 
         long newRowId = db.insert(FreshifyDBHelper.FRESHIFY_TABLE, null, values);
 
-        db.close(); // Schließe die Verbindung zur Datenbank
-        return newRowId; // Gibt die ID der neuen Zeile zurück (oder -1, wenn das Einfügen fehlschlägt)
+        db.close();
+        return newRowId; // -1 if an error occurred
     }
 
     @Override
     public List<ItemEntity> getAllItems() {
-        List<ItemEntity> items = Collections.emptyList();
+        List<ItemEntity> items = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         Cursor cursor = db.query(

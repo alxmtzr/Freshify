@@ -25,7 +25,7 @@ public class FreshifyDBHelper extends SQLiteOpenHelper {
 
     // SQL: CREATE TABLE items
     private static final String SQL_CREATE_TABLE = "CREATE TABLE " + FRESHIFY_TABLE + "  ("
-            + BaseColumns._ID + " INTEGER PRIMARY KEY,"
+            + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + FRESHIFY_COL_ITEM_NAME + " TEXT,"
             + FRESHIFY_COL_ITEM_QUANTITY + " INTEGER,"
             + FRESHIFY_COL_ITEM_CATEGORY_ID + " INTEGER,"
