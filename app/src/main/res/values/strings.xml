@@ -36,4 +36,6 @@
     <string name="expiry_date">Expiry Date</string>
     <string name="delete_item">delete item</string>
     <string name="expiring">expiring</string>
+    <string name="item_deleted">Item deleted</string>
+    <string name="failed_to_delete_item">Failed to delete item</string>
 </resources>

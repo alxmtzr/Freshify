@@ -32,8 +32,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- TODO: **HORIZONTALE** RecyclerView für Kategorien mit FILTER CHIPS -->
-            <!-- ChipGroup für Filter -->
+            <!-- ChipGroup for filtering -->
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -55,7 +54,7 @@
             </HorizontalScrollView>
 
 
-            <!-- Vertikale RecyclerView für Artikel -->
+            <!-- vertical recycler view for items -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/itemsRecyclerView"
                 android:layout_width="match_parent"
@@ -63,8 +62,4 @@
                 android:layout_margin="8dp" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
