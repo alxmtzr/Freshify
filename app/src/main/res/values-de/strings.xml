@@ -26,4 +26,5 @@
     <string name="category_canned_non_perishable">Konserven und haltbare Produkte</string>
     <string name="category_spices_herbs_ingredients">Gewürze, Kräuter und Zutaten</string>
     <string name="category_miscellaneous">Sonstiges</string>
+    <string name="quantity">Anzahl</string>
 </resources>

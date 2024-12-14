@@ -26,4 +26,5 @@
     <string name="category_canned_non_perishable">Canned and Non-Perishable Goods</string>
     <string name="category_spices_herbs_ingredients">Spices, Herbs, and Ingredients</string>
     <string name="category_miscellaneous">Miscellaneous</string>
+    <string name="quantity">quantity</string>
 </resources>

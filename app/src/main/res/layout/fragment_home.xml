@@ -50,21 +50,50 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <!-- text field item name -->
-                    <com.google.android.material.textfield.TextInputLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:orientation="horizontal"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
                         android:layout_marginTop="16dp"
-                        android:hint="@string/item_name">
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/itemNameEditText"
-                            android:layout_width="match_parent"
+                        android:gravity="center_vertical">
+
+                        <!-- Text field for item name -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:imeOptions="actionDone"
-                            android:inputType="text" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            android:layout_weight="1"
+                            android:hint="@string/item_name">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/itemNameEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:imeOptions="actionNext"
+                                android:inputType="text" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!-- Spacer between the fields -->
+                        <Space
+                            android:layout_width="8dp"
+                            android:layout_height="wrap_content" />
+
+                        <!-- Text field for quantity -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/quantity">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/itemQuantityEditText"
+                                android:layout_width="80dp"
+                                android:layout_height="wrap_content"
+                                android:imeOptions="actionDone"
+                                android:inputType="number" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
 
 
                     <!-- category -->
