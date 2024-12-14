@@ -7,7 +7,7 @@ import java.util.List;
 
 import de.alxmtzr.freshify.R;
 import de.alxmtzr.freshify.data.local.CategoryDatabase;
-import de.alxmtzr.freshify.data.model.CategoryModel;
+import de.alxmtzr.freshify.data.model.CategoryEntity;
 
 /**
  * Implementation of the {@link CategoryDatabase} interface.
@@ -29,32 +29,32 @@ public class CategoryDatabaseImpl implements CategoryDatabase {
     @Override
     public List<String> getCategories() {
         List<String> categories = new ArrayList<>();
-        for (CategoryModel category : getCategoryModels()) {
+        for (CategoryEntity category : getCategoryModels()) {
             categories.add(category.getName());
         }
         return categories;
     }
 
     /**
-     * Returns a list of {@link CategoryModel} objects representing the categories.
+     * Returns a list of {@link CategoryEntity} objects representing the categories.
      *
      * @return a list of category models, each containing an ID and a name.
      */
     @Override
-    public List<CategoryModel> getCategoryModels() {
-        List<CategoryModel> categories = new ArrayList<>();
-        categories.add(new CategoryModel(1, context.getString(R.string.category_fruits_vegetables)));
-        categories.add(new CategoryModel(2, context.getString(R.string.category_dairy_alternatives)));
-        categories.add(new CategoryModel(3, context.getString(R.string.category_meat_fish_alternatives)));
-        categories.add(new CategoryModel(4, context.getString(R.string.category_drinks)));
-        categories.add(new CategoryModel(5, context.getString(R.string.category_prepared_meals)));
-        categories.add(new CategoryModel(6, context.getString(R.string.category_sauces_dips_spreads)));
-        categories.add(new CategoryModel(7, context.getString(R.string.category_bakery_dough)));
-        categories.add(new CategoryModel(8, context.getString(R.string.category_snacks_sweets)));
-        categories.add(new CategoryModel(9, context.getString(R.string.category_frozen_items)));
-        categories.add(new CategoryModel(10, context.getString(R.string.category_canned_non_perishable)));
-        categories.add(new CategoryModel(11, context.getString(R.string.category_spices_herbs_ingredients)));
-        categories.add(new CategoryModel(12, context.getString(R.string.category_miscellaneous)));
+    public List<CategoryEntity> getCategoryModels() {
+        List<CategoryEntity> categories = new ArrayList<>();
+        categories.add(new CategoryEntity(1, context.getString(R.string.category_fruits_vegetables)));
+        categories.add(new CategoryEntity(2, context.getString(R.string.category_dairy_alternatives)));
+        categories.add(new CategoryEntity(3, context.getString(R.string.category_meat_fish_alternatives)));
+        categories.add(new CategoryEntity(4, context.getString(R.string.category_drinks)));
+        categories.add(new CategoryEntity(5, context.getString(R.string.category_prepared_meals)));
+        categories.add(new CategoryEntity(6, context.getString(R.string.category_sauces_dips_spreads)));
+        categories.add(new CategoryEntity(7, context.getString(R.string.category_bakery_dough)));
+        categories.add(new CategoryEntity(8, context.getString(R.string.category_snacks_sweets)));
+        categories.add(new CategoryEntity(9, context.getString(R.string.category_frozen_items)));
+        categories.add(new CategoryEntity(10, context.getString(R.string.category_canned_non_perishable)));
+        categories.add(new CategoryEntity(11, context.getString(R.string.category_spices_herbs_ingredients)));
+        categories.add(new CategoryEntity(12, context.getString(R.string.category_miscellaneous)));
         return categories;
     }
 
@@ -66,7 +66,7 @@ public class CategoryDatabaseImpl implements CategoryDatabase {
      */
     @Override
     public String getCategoryById(int id) {
-        for (CategoryModel category : getCategoryModels()) {
+        for (CategoryEntity category : getCategoryModels()) {
             if (category.getId() == id) {
                 return category.getName();
             }
@@ -82,7 +82,7 @@ public class CategoryDatabaseImpl implements CategoryDatabase {
      */
     @Override
     public Integer getIdByCategory(String categoryName) {
-        for (CategoryModel category : getCategoryModels()) {
+        for (CategoryEntity category : getCategoryModels()) {
             if (category.getName().equalsIgnoreCase(categoryName)) {
                 return category.getId();
             }
