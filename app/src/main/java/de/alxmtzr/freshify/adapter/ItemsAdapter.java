@@ -65,6 +65,10 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
         return items.size();
     }
 
+    public List<ItemEntity> getItems() {
+        return items;
+    }
+
     public void updateItems(List<ItemEntity> newItems) {
         this.items = newItems;
         notifyDataSetChanged();

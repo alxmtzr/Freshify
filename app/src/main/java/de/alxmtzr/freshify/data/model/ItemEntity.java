@@ -3,7 +3,7 @@ package de.alxmtzr.freshify.data.model;
 import java.time.LocalDate;
 
 public class ItemEntity {
-    private final long id;
+    private long id;
     private final String name;
     private final int quantity;
     private final int categoryId;
@@ -19,6 +19,11 @@ public class ItemEntity {
         this.categoryName = categoryName;
         this.expiryDate = expiryDate;
         this.comment = comment;
+    }
+
+    // setter for id after db insert
+    public void setId(long id) {
+        this.id = id;
     }
 
     // Getters

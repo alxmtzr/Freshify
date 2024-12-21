@@ -22,6 +22,7 @@ import java.util.List;
 
 import de.alxmtzr.freshify.R;
 import de.alxmtzr.freshify.adapter.ItemsAdapter;
+import de.alxmtzr.freshify.data.concurrency.GetItemsByNameRunnable;
 import de.alxmtzr.freshify.data.local.CategoryDatabase;
 import de.alxmtzr.freshify.data.local.FreshifyRepository;
 import de.alxmtzr.freshify.data.local.impl.CategoryDatabaseImpl;
@@ -33,6 +34,7 @@ public class FridgeFragment extends Fragment {
 
     private FreshifyRepository repository;
     private ItemsAdapter itemsAdapter;
+    private RecyclerView itemsRecyclerView;
     private final List<Integer> selectedCategoryIds = new ArrayList<>();
 
     public FridgeFragment() {
@@ -55,7 +57,6 @@ public class FridgeFragment extends Fragment {
         repository = new FreshifyRepositoryImpl(dbHelper);
 
         // initialize RecyclerView
-        RecyclerView itemsRecyclerView;
         itemsRecyclerView = view.findViewById(R.id.itemsRecyclerView);
         itemsRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         // Adapter
@@ -93,12 +94,15 @@ public class FridgeFragment extends Fragment {
 
     private void searchItems(String query) {
         // search items by name
-        List<ItemEntity> searchedItems = repository.getItemsByName(query);
-
-        // refresh recycler view
-        itemsAdapter.updateItems(searchedItems);
-
-        Log.i("FridgeFragment", "Search result for: " + query + " - " + searchedItems.size() + " items found.");
+        List<ItemEntity> searchedItems = itemsAdapter.getItems();
+        GetItemsByNameRunnable runnable = new GetItemsByNameRunnable(
+                repository,
+                itemsRecyclerView,
+                itemsAdapter,
+                searchedItems,
+                query
+        );
+        new Thread(runnable).start();
     }
 
 
