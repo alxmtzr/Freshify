@@ -74,7 +74,7 @@ public class FridgeFragment extends Fragment {
         initSearchView(view);
         initCategoryChips(view);
 
-        // load all items at start
+        // load all items
         resetFilter();
     }
 
@@ -166,9 +166,9 @@ public class FridgeFragment extends Fragment {
 
     private void resetFilter() {
         showLoadingOverlay();
-        // show all items
-        List<ItemEntity> allItems = itemsAdapter.getItems();
 
+        // get all items
+        List<ItemEntity> allItems = itemsAdapter.getItems();
         GetAllItemsRunnable runnable = new GetAllItemsRunnable(
                 repository,
                 itemsRecyclerView,
@@ -176,11 +176,10 @@ public class FridgeFragment extends Fragment {
                 allItems,
                 loadingOverlay
         );
+
         new Thread(runnable).start();
 
-        // clear selected categories (filter)
         selectedCategoryIds.clear();
-
         Log.i("FridgeFragment", "Filter reset");
     }
 
@@ -189,11 +188,4 @@ public class FridgeFragment extends Fragment {
             loadingOverlay.setVisibility(View.VISIBLE);
         }
     }
-
-    private void hideLoadingOverlay() {
-        if (loadingOverlay != null) {
-            loadingOverlay.setVisibility(View.GONE);
-        }
-    }
-
 }
