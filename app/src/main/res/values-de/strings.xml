@@ -59,5 +59,7 @@
     <string name="expired_since_one_day">abgelaufen seit %1$d Tag</string>
     <string name="expired_since_days">abgelaufen seit %1$d Tagen</string>
     <string name="expires_in_x_days">läuft in x Tagen ab</string>
+    <string name="days_until_expiry">Tage für bald abgelaufene Artikel</string>
+    <string name="_3">3</string>
 
 </resources>

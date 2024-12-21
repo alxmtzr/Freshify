@@ -1,6 +1,9 @@
 package de.alxmtzr.freshify.ui.fragments;
 
+import static de.alxmtzr.freshify.ui.fragments.SettingsFragment.PREF_DAYS_UNTIL_EXPIRY;
+
 import android.app.DatePickerDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -38,7 +41,7 @@ import de.alxmtzr.freshify.data.model.ItemEntity;
 
 public class HomeFragment extends Fragment {
 
-    private static final int DAYS_UNTIL_EXPIRY = 3;
+    private int daysUntilExpiry;
 
     private ListView expiringItemsListView;
     private ExpiryItemsAdapter expiringItemsAdapter;
@@ -60,6 +63,12 @@ public class HomeFragment extends Fragment {
         initSaveItemButton(view);
         initExpiringCardView(view);
         initExpiredCardView(view);
+        getDaysUntilExpiry(view);
+    }
+
+    private void getDaysUntilExpiry(View view) {
+        SharedPreferences preferences = view.getContext().getSharedPreferences("prefs_freshify", 0);
+        daysUntilExpiry = preferences.getInt(PREF_DAYS_UNTIL_EXPIRY, 3); // Default to 3 days
     }
 
     private void initExpiredCardView(@NonNull View view) {
@@ -89,6 +98,7 @@ public class HomeFragment extends Fragment {
         super.onResume();
         loadExpiringItems();
         loadExpiredItems();
+        getDaysUntilExpiry(requireView());
     }
 
     private void loadExpiringItems() {
@@ -102,7 +112,7 @@ public class HomeFragment extends Fragment {
                 expiringItemsListView,
                 expiringItemsAdapter,
                 expiringItems,
-                DAYS_UNTIL_EXPIRY,
+                daysUntilExpiry,
                 noExpiringFoodText
                 );
         new Thread(runnable).start();

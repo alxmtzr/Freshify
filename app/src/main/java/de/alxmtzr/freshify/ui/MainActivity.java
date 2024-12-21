@@ -36,10 +36,16 @@ public class MainActivity extends AppCompatActivity {
 //        insertTestData();
     }
 
-    // only for testing purposes
+    // only for test purposes
     private void insertTestData() {
-        List<ItemEntity> exampleItems = new ArrayList<>();
+        FreshifyRepository repository = new FreshifyRepositoryImpl(new FreshifyDBHelper(this));
 
+        // Check if data already exists
+        if (!repository.getAllItems().isEmpty()) {
+            return; // Exit if data already exists
+        }
+
+        List<ItemEntity> exampleItems = new ArrayList<>();
         // Fruits & Vegetables (Category ID: 1)
         exampleItems.add(new ItemEntity(0, "Apple", 5, 1, "Fruits & Vegetables", LocalDate.of(2024, 12, 31), "Fresh and juicy apples"));
         exampleItems.add(new ItemEntity(0, "Carrots", 3, 1, "Fruits & Vegetables", LocalDate.of(2024, 12, 20), "Organic carrots"));
@@ -97,13 +103,9 @@ public class MainActivity extends AppCompatActivity {
         exampleItems.add(new ItemEntity(0, "Aluminum Foil", 1, 12, "Miscellaneous", LocalDate.of(2028, 12, 31), "Useful for food storage"));
         exampleItems.add(new ItemEntity(0, "Sandwich Bags", 3, 12, "Miscellaneous", LocalDate.of(2027, 8, 15), "Plastic bags for sandwiches"));
 
-        // insert items into database
-        FreshifyRepository repository = new FreshifyRepositoryImpl(new FreshifyDBHelper(this));
         for (ItemEntity item : exampleItems) {
             repository.insertItem(item);
         }
-
-
     }
 
     private void initToolbar() {
