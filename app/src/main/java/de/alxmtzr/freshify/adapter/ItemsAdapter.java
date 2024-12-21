@@ -1,14 +1,13 @@
 package de.alxmtzr.freshify.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
@@ -18,23 +17,45 @@ import de.alxmtzr.freshify.data.local.impl.FreshifyDBHelper;
 import de.alxmtzr.freshify.data.local.impl.FreshifyRepositoryImpl;
 import de.alxmtzr.freshify.data.model.ItemEntity;
 
-public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
+public class ItemsAdapter extends BaseAdapter {
 
-    private List<ItemEntity> items;
+    private final List<ItemEntity> items;
+    private final Context context;
 
-    public ItemsAdapter(List<ItemEntity> items) {
+    public ItemsAdapter(Context context, List<ItemEntity> items) {
+        this.context = context;
         this.items = items;
     }
 
-    @NonNull
     @Override
-    public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_row, parent, false);
-        return new ItemViewHolder(view);
+    public int getCount() {
+        return items.size();
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
+    public Object getItem(int position) {
+        return items.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return items.get(position).getId();
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder;
+
+        if (convertView == null) {
+            // Inflate the row layout
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_list_row, parent, false);
+            holder = new ViewHolder(convertView);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }
+
+        // Get the current item
         ItemEntity item = items.get(position);
 
         // Set the item's data to the view
@@ -45,52 +66,46 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
 
         // Set the delete button's click listener
         holder.deleteItemIcon.setOnClickListener(v -> {
-            FreshifyDBHelper dbHelper = new FreshifyDBHelper(v.getContext());
+            FreshifyDBHelper dbHelper = new FreshifyDBHelper(context);
             FreshifyRepository repository = new FreshifyRepositoryImpl(dbHelper);
 
             long deletedRows = repository.deleteItem(item.getId());
             if (deletedRows > 0) {
                 items.remove(position); // remove item from the list
-                notifyItemRemoved(position); // notify the adapter
-                notifyItemRangeChanged(position, items.size()); // refresh list
-                Toast.makeText(holder.itemView.getContext(), R.string.item_deleted, Toast.LENGTH_SHORT).show();
+                notifyDataSetChanged(); // notify the adapter
+                Toast.makeText(context, R.string.item_deleted, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(holder.itemView.getContext(), R.string.failed_to_delete_item, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.failed_to_delete_item, Toast.LENGTH_SHORT).show();
             }
         });
+
+        return convertView;
     }
 
-    @Override
-    public int getItemCount() {
-        return items.size();
+    public void updateItems(List<ItemEntity> newItems) {
+        this.items.clear();
+        this.items.addAll(newItems);
+        notifyDataSetChanged();
+    }
+
+    private static class ViewHolder {
+        TextView itemName;
+        TextView itemQuantity;
+        TextView itemCategory;
+        TextView itemExpiryDate;
+        ImageView deleteItemIcon;
+
+        ViewHolder(View view) {
+            // Initialize the views
+            itemName = view.findViewById(R.id.itemName);
+            itemQuantity = view.findViewById(R.id.itemQuantity);
+            itemCategory = view.findViewById(R.id.itemCategory);
+            itemExpiryDate = view.findViewById(R.id.itemExpiryDate);
+            deleteItemIcon = view.findViewById(R.id.deleteItemIcon);
+        }
     }
 
     public List<ItemEntity> getItems() {
         return items;
     }
-
-    public void updateItems(List<ItemEntity> newItems) {
-        this.items = newItems;
-        notifyDataSetChanged();
-    }
-
-    public static class ItemViewHolder extends RecyclerView.ViewHolder {
-        TextView itemName, itemQuantity, itemCategory, itemExpiryDate;
-        ImageView deleteItemIcon;
-
-        public ItemViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            // text views for item information
-            itemName = itemView.findViewById(R.id.itemName);
-            itemQuantity = itemView.findViewById(R.id.itemQuantity);
-            itemCategory = itemView.findViewById(R.id.itemCategory);
-            itemExpiryDate = itemView.findViewById(R.id.itemExpiryDate);
-
-            // delete button
-            deleteItemIcon = itemView.findViewById(R.id.deleteItemIcon);
-        }
-    }
-
 }
-

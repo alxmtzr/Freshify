@@ -1,9 +1,8 @@
 package de.alxmtzr.freshify.data.concurrency;
 
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.Toast;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
@@ -13,18 +12,18 @@ import de.alxmtzr.freshify.data.model.ItemEntity;
 
 public class GetItemsByNameRunnable implements Runnable {
     private final FreshifyRepository repository;
-    private final RecyclerView recyclerView;
+    private final ListView listView;
     private final ItemsAdapter adapter;
     private final List<ItemEntity> data;
     private final String itemName;
 
     public GetItemsByNameRunnable(FreshifyRepository repository,
-                                  RecyclerView recyclerView,
+                                  ListView listView,
                                   ItemsAdapter adapter,
                                   List<ItemEntity> data,
                                   String itemName) {
         this.repository = repository;
-        this.recyclerView = recyclerView;
+        this.listView = listView;
         this.adapter = adapter;
         this.data = data;
         this.itemName = itemName;
@@ -37,10 +36,10 @@ public class GetItemsByNameRunnable implements Runnable {
             data.clear();
             data.addAll(items);
 
-            recyclerView.post(adapter::notifyDataSetChanged);
+            listView.post(adapter::notifyDataSetChanged);
             Log.i("GetItemsByNameRunnable", "Search result for: " + itemName + " - " + data.size() + " items found.");
         } else {
-            recyclerView.post(() -> Toast.makeText(recyclerView.getContext(), "Error fetching items by name.", Toast.LENGTH_SHORT).show());
+            listView.post(() -> Toast.makeText(listView.getContext(), "Error fetching items by name.", Toast.LENGTH_SHORT).show());
             Log.i("GetItemsByNameRunnable", "Error fetching items by name for: " + itemName);
         }
     }

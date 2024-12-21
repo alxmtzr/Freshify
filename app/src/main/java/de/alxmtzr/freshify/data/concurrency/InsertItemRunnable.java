@@ -1,8 +1,7 @@
 package de.alxmtzr.freshify.data.concurrency;
 
+import android.widget.ListView;
 import android.widget.Toast;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
@@ -12,18 +11,18 @@ import de.alxmtzr.freshify.data.model.ItemEntity;
 
 public class InsertItemRunnable implements Runnable {
     private final FreshifyRepository repository;
-    private final RecyclerView recyclerView;
+    private final ListView listView;
     private final ItemsAdapter adapter;
     private final List<ItemEntity> data;
     private final ItemEntity newItem;
 
     public InsertItemRunnable(FreshifyRepository repository,
-                              RecyclerView recyclerView,
+                              ListView listView,
                               ItemsAdapter adapter,
                               List<ItemEntity> data,
                               ItemEntity newItem) {
         this.repository = repository;
-        this.recyclerView = recyclerView;
+        this.listView = listView;
         this.adapter = adapter;
         this.data = data;
         this.newItem = newItem;
@@ -37,12 +36,10 @@ public class InsertItemRunnable implements Runnable {
             data.add(newItem);
 
             // post UI update
-            recyclerView.post(() -> adapter.notifyItemInserted(data.size() - 1));
+            listView.post(adapter::notifyDataSetChanged);
         } else {
             // post error message
-            recyclerView.post(() -> {
-                Toast.makeText(recyclerView.getContext(), "Error inserting new item.", Toast.LENGTH_SHORT).show();
-            });
+            listView.post(() -> Toast.makeText(listView.getContext(), "Error inserting new item.", Toast.LENGTH_SHORT).show());
         }
     }
 

@@ -7,13 +7,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -40,7 +39,7 @@ public class FridgeFragment extends Fragment {
 
     // ui components
     private ItemsAdapter itemsAdapter;
-    private RecyclerView itemsRecyclerView;
+    private ListView itemsListView;
     private CardView loadingOverlay;
 
     public FridgeFragment() {
@@ -65,11 +64,10 @@ public class FridgeFragment extends Fragment {
         // initialize ui components
         loadingOverlay = view.findViewById(R.id.loadingOverlayFridgeFragment);
         // initialize RecyclerView
-        itemsRecyclerView = view.findViewById(R.id.itemsRecyclerView);
-        itemsRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        itemsListView = view.findViewById(R.id.itemsListView);
         // Adapter
-        itemsAdapter = new ItemsAdapter(new ArrayList<>());
-        itemsRecyclerView.setAdapter(itemsAdapter);
+        itemsAdapter = new ItemsAdapter(requireContext(), new ArrayList<>());
+        itemsListView.setAdapter(itemsAdapter);
 
         initSearchView(view);
         initCategoryChips(view);
@@ -105,7 +103,7 @@ public class FridgeFragment extends Fragment {
         List<ItemEntity> searchedItems = itemsAdapter.getItems();
         GetItemsByNameRunnable runnable = new GetItemsByNameRunnable(
                 repository,
-                itemsRecyclerView,
+                itemsListView,
                 itemsAdapter,
                 searchedItems,
                 query
@@ -155,7 +153,7 @@ public class FridgeFragment extends Fragment {
             List<ItemEntity> filteredItems = itemsAdapter.getItems();
             GetItemsByCategoriesRunnable runnable = new GetItemsByCategoriesRunnable(
                     repository,
-                    itemsRecyclerView,
+                    itemsListView,
                     itemsAdapter,
                     filteredItems,
                     selectedCategoryIds
@@ -171,7 +169,7 @@ public class FridgeFragment extends Fragment {
         List<ItemEntity> allItems = itemsAdapter.getItems();
         GetAllItemsRunnable runnable = new GetAllItemsRunnable(
                 repository,
-                itemsRecyclerView,
+                itemsListView,
                 itemsAdapter,
                 allItems,
                 loadingOverlay
