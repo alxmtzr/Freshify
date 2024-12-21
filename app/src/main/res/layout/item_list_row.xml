@@ -93,16 +93,16 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- right part delete button -->
+    <!-- right part navigate to details button -->
     <ImageView
-        android:id="@+id/deleteItemIcon"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:id="@+id/navigateToDetailsButton"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginStart="8dp"
-        android:src="@drawable/ic_delete"
-        android:contentDescription="@string/delete_item"
+        android:src="@drawable/ic_details"
+        android:contentDescription="@string/navigate_to_details"
         android:clickable="true"
         android:focusable="true"
         android:background="?attr/selectableItemBackgroundBorderless"
-        app:tint="@color/md_theme_error" />
+        app:tint="@color/md_theme_inversePrimary" />
 </LinearLayout>

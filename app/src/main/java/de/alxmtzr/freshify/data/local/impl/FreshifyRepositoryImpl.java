@@ -174,6 +174,33 @@ public class FreshifyRepositoryImpl implements FreshifyRepository {
         return items;
     }
 
+    @Override
+    public ItemEntity getItemById(long itemId) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        ItemEntity item = null;
+
+        Cursor cursor = db.query(
+                FreshifyDBHelper.FRESHIFY_TABLE,
+                null,
+                BaseColumns._ID + " = ?",
+                new String[]{String.valueOf(itemId)},
+                null,
+                null,
+                null
+        );
+
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                item = mapCursorToItemEntity(cursor);
+            }
+            cursor.close();
+        }
+
+        db.close();
+        return item;
+    }
+
+
     private ItemEntity mapCursorToItemEntity(Cursor cursor) {
         long id = cursor.getLong(cursor.getColumnIndexOrThrow(BaseColumns._ID));
         String name = cursor.getString(cursor.getColumnIndexOrThrow(FreshifyDBHelper.FRESHIFY_COL_ITEM_NAME));

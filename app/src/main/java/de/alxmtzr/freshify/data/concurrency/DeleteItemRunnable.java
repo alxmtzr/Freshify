@@ -1,49 +1,36 @@
 package de.alxmtzr.freshify.data.concurrency;
 
+import android.view.View;
 import android.widget.Toast;
 
-import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.List;
-
-import de.alxmtzr.freshify.adapter.ItemsAdapter;
 import de.alxmtzr.freshify.data.local.FreshifyRepository;
-import de.alxmtzr.freshify.data.model.ItemEntity;
 
 public class DeleteItemRunnable implements Runnable {
     private final FreshifyRepository repository;
-    private final RecyclerView recyclerView;
-    private final ItemsAdapter adapter;
-    private final List<ItemEntity> data;
-    private final int position;
+    private final long itemId;
+    private final View view; // To access the context for UI updates
+    private final Runnable onDeleteSuccess;
 
-    public DeleteItemRunnable(FreshifyRepository repository,
-                              RecyclerView recyclerView,
-                              ItemsAdapter adapter,
-                              List<ItemEntity> data,
-                              int position) {
+    public DeleteItemRunnable(
+            FreshifyRepository repository,
+            long itemId, View view,
+            Runnable onDeleteSuccess) {
         this.repository = repository;
-        this.recyclerView = recyclerView;
-        this.adapter = adapter;
-        this.data = data;
-        this.position = position;
+        this.itemId = itemId;
+        this.view = view;
+        this.onDeleteSuccess = onDeleteSuccess;
     }
 
     @Override
     public void run() {
-        ItemEntity itemToDelete = data.get(position);
-        long deletedRows = repository.deleteItem(itemToDelete.getId());
-        if (deletedRows > 0) {
-            data.remove(position);
-
-            // post UI update
-            recyclerView.post(() -> adapter.notifyItemRemoved(position));
-        } else {
-            // post error message
-            recyclerView.post(() -> {
-                Toast.makeText(recyclerView.getContext(), "Error deleting item.", Toast.LENGTH_SHORT).show();
-            });
-        }
+        long deletedRows = repository.deleteItem(itemId);
+        view.post(() -> {
+            if (deletedRows > 0) {
+                Toast.makeText(view.getContext(), "Item deleted successfully!", Toast.LENGTH_SHORT).show();
+                onDeleteSuccess.run(); // Execute success callback (e.g., finish activity)
+            } else {
+                Toast.makeText(view.getContext(), "Failed to delete item.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
-

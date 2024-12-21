@@ -38,5 +38,20 @@
     <string name="expiring">läuft ab</string>
     <string name="item_deleted">Eintrag gelöscht</string>
     <string name="failed_to_delete_item">Löschen fehlgeschlagen</string>
-    <string name="loading">Lädt...</string>
+    <string name="loading">Lädt…</string>
+    <string name="delete_item_uppercase">Artikel löschen</string>
+    <string name="are_you_sure_you_want_to_delete_this_item">Bist du sicher, dass du diesen Artikel löschen möchtest?</string>
+    <string name="yes">Ja</string>
+    <string name="item_details">Artikel Informationen</string>
+    <string name="item_name_label">Arikelname:</string>
+    <string name="item">Artikel</string>
+    <string name="quantity_label">Anzahl:</string>
+    <string name="_0">0</string>
+    <string name="category_label">Kategorie:</string>
+    <string name="category_uppercase">Kategorie</string>
+    <string name="expiry_date_label">Ablaufdatum:</string>
+    <string name="expiry_date_uppercase">Ablaufdatum</string>
+    <string name="comment_label">Kommentar:</string>
+    <string name="comment_uppercase">Kommentar</string>
+    <string name="navigate_to_details">Artikeldetails anzeigen</string>
 </resources>
