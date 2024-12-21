@@ -229,6 +229,18 @@
 
                 </androidx.core.widget.NestedScrollView>
 
+                <!-- Placeholder TextView -->
+                <TextView
+                    android:id="@+id/noExpiringFoodText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="16dp"
+                    android:text="@string/no_expiring_food"
+                    android:visibility="gone"
+                    android:textSize="16sp"
+                    android:textColor="@color/md_theme_onErrorContainer" />
+
             </androidx.cardview.widget.CardView>
 
 

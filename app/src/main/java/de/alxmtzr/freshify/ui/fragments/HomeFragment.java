@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
@@ -43,6 +44,8 @@ public class HomeFragment extends Fragment {
     private ExpiryItemsAdapter expiringItemsAdapter;
     private ListView expiredItemsListView;
     private ExpiryItemsAdapter expiredItemsAdapter;
+    private TextView noExpiringFoodText;
+    private TextView noExpiredFoodText;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -60,6 +63,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void initExpiredCardView(@NonNull View view) {
+        noExpiredFoodText = view.findViewById(R.id.noExpiredFoodText);
         expiredItemsListView = view.findViewById(R.id.expiredFoodListView);
         expiredItemsAdapter = new ExpiryItemsAdapter(
                 requireContext(),
@@ -70,6 +74,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void initExpiringCardView(@NonNull View view) {
+        noExpiringFoodText = view.findViewById(R.id.noExpiringFoodText);
         expiringItemsListView = view.findViewById(R.id.expiringFoodListView);
         expiringItemsAdapter = new ExpiryItemsAdapter(
                 requireContext(),
@@ -83,6 +88,7 @@ public class HomeFragment extends Fragment {
     public void onResume() {
         super.onResume();
         loadExpiringItems();
+        loadExpiredItems();
     }
 
     private void loadExpiringItems() {
@@ -96,7 +102,9 @@ public class HomeFragment extends Fragment {
                 expiringItemsListView,
                 expiringItemsAdapter,
                 expiringItems,
-                DAYS_UNTIL_EXPIRY);
+                DAYS_UNTIL_EXPIRY,
+                noExpiringFoodText
+                );
         new Thread(runnable).start();
     }
 
@@ -110,7 +118,8 @@ public class HomeFragment extends Fragment {
                 repository,
                 expiredItemsListView,
                 expiredItemsAdapter,
-                expiredItems);
+                expiredItems,
+                noExpiredFoodText);
         new Thread(runnable).start();
     }
 
