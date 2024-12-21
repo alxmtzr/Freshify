@@ -22,6 +22,7 @@ import java.util.List;
 
 import de.alxmtzr.freshify.R;
 import de.alxmtzr.freshify.adapter.ItemsAdapter;
+import de.alxmtzr.freshify.data.concurrency.GetAllItemsRunnable;
 import de.alxmtzr.freshify.data.concurrency.GetItemsByCategoriesRunnable;
 import de.alxmtzr.freshify.data.concurrency.GetItemsByNameRunnable;
 import de.alxmtzr.freshify.data.local.CategoryDatabase;
@@ -159,10 +160,15 @@ public class FridgeFragment extends Fragment {
 
     private void resetFilter() {
         // show all items
-        List<ItemEntity> allItems = repository.getAllItems();
+        List<ItemEntity> allItems = itemsAdapter.getItems();
 
-        // refresh adapter
-        itemsAdapter.updateItems(allItems);
+        GetAllItemsRunnable runnable = new GetAllItemsRunnable(
+                repository,
+                itemsRecyclerView,
+                itemsAdapter,
+                allItems
+        );
+        new Thread(runnable).start();
 
         // clear selected categories (filter)
         selectedCategoryIds.clear();

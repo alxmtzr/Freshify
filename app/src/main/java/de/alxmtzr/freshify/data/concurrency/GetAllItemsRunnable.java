@@ -1,5 +1,6 @@
 package de.alxmtzr.freshify.data.concurrency;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,11 +36,11 @@ public class GetAllItemsRunnable implements Runnable {
 
             // post UI update
             recyclerView.post(adapter::notifyDataSetChanged);
+            Log.i("GetAllItemsRunnable", "Loaded " + allItems.size() + " items,");
         } else {
             // post error message
-            recyclerView.post(() -> {
-                Toast.makeText(recyclerView.getContext(), "Error loading items.", Toast.LENGTH_SHORT).show();
-            });
+            recyclerView.post(() -> Toast.makeText(recyclerView.getContext(), "Error loading items.", Toast.LENGTH_SHORT).show());
+            Log.i("GetAllItemsRunnable", "Error loading items");
         }
     }
 }
