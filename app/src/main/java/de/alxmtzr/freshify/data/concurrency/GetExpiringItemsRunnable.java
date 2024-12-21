@@ -6,20 +6,20 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import de.alxmtzr.freshify.adapter.ExpiringItemsAdapter;
+import de.alxmtzr.freshify.adapter.ExpiryItemsAdapter;
 import de.alxmtzr.freshify.data.local.FreshifyRepository;
 import de.alxmtzr.freshify.data.model.ItemEntity;
 
 public class GetExpiringItemsRunnable implements Runnable {
     private final FreshifyRepository repository;
     private final ListView listView;
-    private final ExpiringItemsAdapter adapter;
+    private final ExpiryItemsAdapter adapter;
     private final List<ItemEntity> data;
     private final int daysUntilExpiry;
 
     public GetExpiringItemsRunnable(FreshifyRepository repository,
                                         ListView listView,
-                                        ExpiringItemsAdapter adapter,
+                                        ExpiryItemsAdapter adapter,
                                         List<ItemEntity> data,
                                         int daysUntilExpiry) {
         this.repository = repository;

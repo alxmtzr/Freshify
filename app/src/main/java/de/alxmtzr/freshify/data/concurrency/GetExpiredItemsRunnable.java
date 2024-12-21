@@ -1,27 +1,27 @@
 package de.alxmtzr.freshify.data.concurrency;
 
+import android.util.Log;
+import android.widget.ListView;
 import android.widget.Toast;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import de.alxmtzr.freshify.adapter.ItemsAdapter;
+import de.alxmtzr.freshify.adapter.ExpiryItemsAdapter;
 import de.alxmtzr.freshify.data.local.FreshifyRepository;
 import de.alxmtzr.freshify.data.model.ItemEntity;
 
 public class GetExpiredItemsRunnable implements Runnable {
     private final FreshifyRepository repository;
-    private final RecyclerView recyclerView;
-    private final ItemsAdapter adapter;
+    private final ListView listView;
+    private final ExpiryItemsAdapter adapter;
     private final List<ItemEntity> data;
 
     public GetExpiredItemsRunnable(FreshifyRepository repository,
-                                   RecyclerView recyclerView,
-                                   ItemsAdapter adapter,
+                                   ListView listView,
+                                   ExpiryItemsAdapter adapter,
                                    List<ItemEntity> data) {
         this.repository = repository;
-        this.recyclerView = recyclerView;
+        this.listView = listView;
         this.adapter = adapter;
         this.data = data;
     }
@@ -33,9 +33,14 @@ public class GetExpiredItemsRunnable implements Runnable {
             data.clear();
             data.addAll(expiredItems);
 
-            recyclerView.post(adapter::notifyDataSetChanged);
+            // log expiring items
+            for (ItemEntity item : expiredItems) {
+                Log.i("GetExpiredItemsRunnable", "Expired item: " + item.getName());
+            }
+
+            listView.post(adapter::notifyDataSetChanged);
         } else {
-            recyclerView.post(() -> Toast.makeText(recyclerView.getContext(), "Error fetching expired items.", Toast.LENGTH_SHORT).show());
+            listView.post(() -> Toast.makeText(listView.getContext(), "Error fetching expired items.", Toast.LENGTH_SHORT).show());
         }
     }
 }

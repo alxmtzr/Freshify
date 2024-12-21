@@ -270,14 +270,21 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHeight_percent="0.3" >
 
-                <ListView
-                    android:id="@+id/expiredFoodListView"
+                <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_margin="16dp"
-                    android:visibility="gone"
-                    />
+                    android:layout_height="200dp"
+                    android:padding="16dp"
+                    android:fillViewport="true">
+
+                    <ListView
+                        android:id="@+id/expiredFoodListView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:divider="@android:color/transparent"
+                        android:dividerHeight="16dp"
+                        android:nestedScrollingEnabled="true" />
+
+                </androidx.core.widget.NestedScrollView>
 
                 <!-- Placeholder TextView -->
                 <TextView
@@ -287,6 +294,7 @@
                     android:layout_gravity="center"
                     android:layout_margin="16dp"
                     android:text="@string/no_expired_food"
+                    android:visibility="gone"
                     android:textSize="16sp"
                     android:textColor="@color/md_theme_onErrorContainer" />
             </androidx.cardview.widget.CardView>

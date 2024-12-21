@@ -15,12 +15,12 @@ import de.alxmtzr.freshify.R;
 import de.alxmtzr.freshify.data.model.ItemEntity;
 import de.alxmtzr.freshify.ui.ItemDetailsActivity;
 
-public class ExpiringItemsAdapter extends BaseAdapter {
+public class ExpiryItemsAdapter extends BaseAdapter {
 
     private final List<ItemEntity> items;
     private final Context context;
 
-    public ExpiringItemsAdapter(Context context, List<ItemEntity> items) {
+    public ExpiryItemsAdapter(Context context, List<ItemEntity> items) {
         this.context = context;
         this.items = items;
     }
@@ -42,15 +42,15 @@ public class ExpiringItemsAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ExpiringItemsAdapter.ViewHolder holder;
+        ExpiryItemsAdapter.ViewHolder holder;
 
         if (convertView == null) {
             // Inflate the row layout
             convertView = LayoutInflater.from(context).inflate(R.layout.card_item_list_row, parent, false);
-            holder = new ExpiringItemsAdapter.ViewHolder(convertView);
+            holder = new ExpiryItemsAdapter.ViewHolder(convertView);
             convertView.setTag(holder);
         } else {
-            holder = (ExpiringItemsAdapter.ViewHolder) convertView.getTag();
+            holder = (ExpiryItemsAdapter.ViewHolder) convertView.getTag();
         }
 
         // Get the current item
@@ -62,13 +62,22 @@ public class ExpiringItemsAdapter extends BaseAdapter {
         // calculate days between now and expiry date
         long daysUntilExpiry = item.getExpiryDate().toEpochDay() - java.time.LocalDate.now().toEpochDay();
 
+        // set the expiry date text based on the days until expiry
         if (daysUntilExpiry == 1) {
             holder.expiryItemText.setText(
                     holder.itemName.getContext().getString(R.string.expires_in_one_day, daysUntilExpiry)
             );
-        } else {
+        } else if (daysUntilExpiry > 1) {
             holder.expiryItemText.setText(
                     holder.itemName.getContext().getString(R.string.expires_in_multiple_days, daysUntilExpiry)
+            );
+        } else if (daysUntilExpiry == -1) {
+            holder.expiryItemText.setText(
+                    holder.itemName.getContext().getString(R.string.expired_since_one_day, -daysUntilExpiry)
+            );
+        } else {
+            holder.expiryItemText.setText(
+                    holder.itemName.getContext().getString(R.string.expired_since_days, -daysUntilExpiry)
             );
         }
 

@@ -119,7 +119,7 @@ public class FreshifyRepositoryImpl implements FreshifyRepository {
                 null,
                 null,
                 null,
-                null);
+                FreshifyDBHelper.FRESHIFY_COL_ITEM_EXPIRY_DATE + " ASC");
 
         if (cursor != null) {
             while (cursor.moveToNext()) {
@@ -141,7 +141,7 @@ public class FreshifyRepositoryImpl implements FreshifyRepository {
                 new String[]{"+" + daysUntilExpiry + " days"},
                 null,
                 null,
-                null);
+                FreshifyDBHelper.FRESHIFY_COL_ITEM_EXPIRY_DATE + " DESC");
 
         if (cursor != null) {
             while (cursor.moveToNext()) {
