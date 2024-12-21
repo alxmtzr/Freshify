@@ -22,6 +22,7 @@ import java.util.List;
 
 import de.alxmtzr.freshify.R;
 import de.alxmtzr.freshify.adapter.ItemsAdapter;
+import de.alxmtzr.freshify.data.concurrency.GetItemsByCategoriesRunnable;
 import de.alxmtzr.freshify.data.concurrency.GetItemsByNameRunnable;
 import de.alxmtzr.freshify.data.local.CategoryDatabase;
 import de.alxmtzr.freshify.data.local.FreshifyRepository;
@@ -144,10 +145,15 @@ public class FridgeFragment extends Fragment {
             resetFilter();
         } else {
             // show items with selected categories
-            List<ItemEntity> filteredItems = repository.getItemsByCategories(selectedCategoryIds);
-            itemsAdapter.updateItems(filteredItems);
-
-            Log.i("FridgeFragment", "Filtered by " + selectedCategoryIds.size() + " categories");
+            List<ItemEntity> filteredItems = itemsAdapter.getItems();
+            GetItemsByCategoriesRunnable runnable = new GetItemsByCategoriesRunnable(
+                    repository,
+                    itemsRecyclerView,
+                    itemsAdapter,
+                    filteredItems,
+                    selectedCategoryIds
+            );
+            new Thread(runnable).start();
         }
     }
 

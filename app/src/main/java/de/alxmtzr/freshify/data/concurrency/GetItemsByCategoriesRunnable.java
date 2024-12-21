@@ -1,5 +1,6 @@
 package de.alxmtzr.freshify.data.concurrency;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,18 +11,18 @@ import de.alxmtzr.freshify.adapter.ItemsAdapter;
 import de.alxmtzr.freshify.data.local.FreshifyRepository;
 import de.alxmtzr.freshify.data.model.ItemEntity;
 
-public class GetItemsByCategoryRunnable implements Runnable {
+public class GetItemsByCategoriesRunnable implements Runnable {
     private final FreshifyRepository repository;
     private final RecyclerView recyclerView;
     private final ItemsAdapter adapter;
     private final List<ItemEntity> data;
     private final List<Integer> categoryIds;
 
-    public GetItemsByCategoryRunnable(FreshifyRepository repository,
-                                      RecyclerView recyclerView,
-                                      ItemsAdapter adapter,
-                                      List<ItemEntity> data,
-                                      List<Integer> categoryIds) {
+    public GetItemsByCategoriesRunnable(FreshifyRepository repository,
+                                        RecyclerView recyclerView,
+                                        ItemsAdapter adapter,
+                                        List<ItemEntity> data,
+                                        List<Integer> categoryIds) {
         this.repository = repository;
         this.recyclerView = recyclerView;
         this.adapter = adapter;
@@ -38,11 +39,11 @@ public class GetItemsByCategoryRunnable implements Runnable {
 
             // post UI update
             recyclerView.post(adapter::notifyDataSetChanged);
+            Log.i("GetItemsByCategoriesRunnable", "Filtered by " + categoryIds.size() + " categories");
         } else {
             // post error message
-            recyclerView.post(() -> {
-                Toast.makeText(recyclerView.getContext(), "Error filtering items.", Toast.LENGTH_SHORT).show();
-            });
+            recyclerView.post(() -> Toast.makeText(recyclerView.getContext(), "Error filtering items.", Toast.LENGTH_SHORT).show());
+            Log.i("GetItemsByCategoriesRunnable", "Error filtering items");
         }
     }
 }
