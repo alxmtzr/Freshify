@@ -54,4 +54,8 @@
     <string name="comment_label">Kommentar:</string>
     <string name="comment_uppercase">Kommentar</string>
     <string name="navigate_to_details">Artikeldetails anzeigen</string>
+    <string name="expires_in_one_day">läuft in %1$d Tag ab</string>
+    <string name="expires_in_multiple_days">läuft in %1$d Tagen ab</string>
+    <string name="expires_in_x_days">läuft in x Tagen ab</string>
+
 </resources>

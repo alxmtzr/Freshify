@@ -12,16 +12,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Objects;
 
 import de.alxmtzr.freshify.R;
+import de.alxmtzr.freshify.adapter.ExpiringItemsAdapter;
+import de.alxmtzr.freshify.data.concurrency.GetExpiringItemsRunnable;
 import de.alxmtzr.freshify.data.local.CategoryDatabase;
 import de.alxmtzr.freshify.data.local.FreshifyRepository;
 import de.alxmtzr.freshify.data.local.impl.CategoryDatabaseImpl;
@@ -30,6 +35,12 @@ import de.alxmtzr.freshify.data.local.impl.FreshifyRepositoryImpl;
 import de.alxmtzr.freshify.data.model.ItemEntity;
 
 public class HomeFragment extends Fragment {
+
+    private static final int DAYS_UNTIL_EXPIRY = 3;
+
+    private ListView expiringItemsListView;
+    private ExpiringItemsAdapter expiringItemsAdapter;
+    private ListView expiredItemsListView;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -42,6 +53,36 @@ public class HomeFragment extends Fragment {
         initCategoryDropDown(view);
         initExpiryDateField(view);
         initSaveItemButton(view);
+
+        expiringItemsListView = view.findViewById(R.id.expiringFoodListView);
+        expiringItemsAdapter = new ExpiringItemsAdapter(requireContext(), new ArrayList<>());
+        expiringItemsListView.setAdapter(expiringItemsAdapter);
+
+        loadExpiringItems();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadExpiringItems();
+    }
+
+    private void loadExpiringItems() {
+        FreshifyDBHelper dbHelper = new FreshifyDBHelper(requireContext());
+        FreshifyRepository repository = new FreshifyRepositoryImpl(dbHelper);
+        List<ItemEntity> expiringItems = expiringItemsAdapter.getItems();
+
+        // get expiring items
+        GetExpiringItemsRunnable runnable = new GetExpiringItemsRunnable(
+                repository,
+                expiringItemsListView,
+                expiringItemsAdapter,
+                expiringItems,
+                DAYS_UNTIL_EXPIRY);
+        new Thread(runnable).start();
+    }
+
+    private void loadExpiredItems() {
     }
 
     private void initSaveItemButton(View view) {
@@ -104,6 +145,7 @@ public class HomeFragment extends Fragment {
 
             FreshifyDBHelper dbHelper = new FreshifyDBHelper(requireContext());
             FreshifyRepository repository = new FreshifyRepositoryImpl(dbHelper);
+
             long newRowId = repository.insertItem(newItem);
             if (newRowId != -1) {
                 Toast.makeText(requireContext(), getString(R.string.item_saved_successfully), Toast.LENGTH_SHORT).show();
@@ -111,6 +153,9 @@ public class HomeFragment extends Fragment {
             } else {
                 Toast.makeText(requireContext(), getString(R.string.failed_to_save_item), Toast.LENGTH_SHORT).show();
             }
+
+            loadExpiringItems();
+            loadExpiredItems();
         });
     }
 
