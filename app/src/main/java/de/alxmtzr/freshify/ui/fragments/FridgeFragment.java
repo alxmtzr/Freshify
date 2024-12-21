@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,9 +36,12 @@ import de.alxmtzr.freshify.data.model.ItemEntity;
 public class FridgeFragment extends Fragment {
 
     private FreshifyRepository repository;
+    private final List<Integer> selectedCategoryIds = new ArrayList<>();
+
+    // ui components
     private ItemsAdapter itemsAdapter;
     private RecyclerView itemsRecyclerView;
-    private final List<Integer> selectedCategoryIds = new ArrayList<>();
+    private CardView loadingOverlay;
 
     public FridgeFragment() {
         // Required empty public constructor
@@ -58,6 +62,8 @@ public class FridgeFragment extends Fragment {
         FreshifyDBHelper dbHelper = new FreshifyDBHelper(getContext());
         repository = new FreshifyRepositoryImpl(dbHelper);
 
+        // initialize ui components
+        loadingOverlay = view.findViewById(R.id.loadingOverlayFridgeFragment);
         // initialize RecyclerView
         itemsRecyclerView = view.findViewById(R.id.itemsRecyclerView);
         itemsRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -159,6 +165,7 @@ public class FridgeFragment extends Fragment {
     }
 
     private void resetFilter() {
+        showLoadingOverlay();
         // show all items
         List<ItemEntity> allItems = itemsAdapter.getItems();
 
@@ -166,7 +173,8 @@ public class FridgeFragment extends Fragment {
                 repository,
                 itemsRecyclerView,
                 itemsAdapter,
-                allItems
+                allItems,
+                loadingOverlay
         );
         new Thread(runnable).start();
 
@@ -175,4 +183,17 @@ public class FridgeFragment extends Fragment {
 
         Log.i("FridgeFragment", "Filter reset");
     }
+
+    private void showLoadingOverlay() {
+        if (loadingOverlay != null) {
+            loadingOverlay.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void hideLoadingOverlay() {
+        if (loadingOverlay != null) {
+            loadingOverlay.setVisibility(View.GONE);
+        }
+    }
+
 }

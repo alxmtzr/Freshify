@@ -62,4 +62,42 @@
                 android:layout_margin="8dp" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <!-- Loading Overlay for progress bar -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/loadingOverlayFridgeFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp"
+        app:cardBackgroundColor="@color/md_theme_background"
+        app:cardElevation="16dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp"
+            android:orientation="vertical" >
+            <!-- ProgressBar -->
+            <ProgressBar
+                android:id="@+id/progressBarFridgeFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <!-- Loading Text -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|bottom"
+                android:layout_marginTop="16dp"
+                android:text="@string/loading"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/md_theme_primary" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

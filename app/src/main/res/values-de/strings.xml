@@ -38,4 +38,5 @@
     <string name="expiring">läuft ab</string>
     <string name="item_deleted">Eintrag gelöscht</string>
     <string name="failed_to_delete_item">Löschen fehlgeschlagen</string>
+    <string name="loading">Lädt...</string>
 </resources>
