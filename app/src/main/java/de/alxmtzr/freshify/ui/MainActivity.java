@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initToolbar() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbarItemDetails);
         setSupportActionBar(toolbar);
 
         // set status bar color

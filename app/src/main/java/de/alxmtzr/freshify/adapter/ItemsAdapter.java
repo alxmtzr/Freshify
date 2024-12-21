@@ -1,21 +1,19 @@
 package de.alxmtzr.freshify.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
 import de.alxmtzr.freshify.R;
-import de.alxmtzr.freshify.data.local.FreshifyRepository;
-import de.alxmtzr.freshify.data.local.impl.FreshifyDBHelper;
-import de.alxmtzr.freshify.data.local.impl.FreshifyRepositoryImpl;
 import de.alxmtzr.freshify.data.model.ItemEntity;
+import de.alxmtzr.freshify.ui.ItemDetailsActivity;
 
 public class ItemsAdapter extends BaseAdapter {
 
@@ -65,18 +63,10 @@ public class ItemsAdapter extends BaseAdapter {
         holder.itemExpiryDate.setText(item.getExpiryDate().toString());
 
         // Set the delete button's click listener
-        holder.deleteItemIcon.setOnClickListener(v -> {
-            FreshifyDBHelper dbHelper = new FreshifyDBHelper(context);
-            FreshifyRepository repository = new FreshifyRepositoryImpl(dbHelper);
-
-            long deletedRows = repository.deleteItem(item.getId());
-            if (deletedRows > 0) {
-                items.remove(position); // remove item from the list
-                notifyDataSetChanged(); // notify the adapter
-                Toast.makeText(context, R.string.item_deleted, Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(context, R.string.failed_to_delete_item, Toast.LENGTH_SHORT).show();
-            }
+        holder.navigateToDetailsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(parent.getContext(), ItemDetailsActivity.class);
+            intent.putExtra("itemId", item.getId());
+            parent.getContext().startActivity(intent);
         });
 
         return convertView;
@@ -93,7 +83,7 @@ public class ItemsAdapter extends BaseAdapter {
         TextView itemQuantity;
         TextView itemCategory;
         TextView itemExpiryDate;
-        ImageView deleteItemIcon;
+        ImageView navigateToDetailsButton;
 
         ViewHolder(View view) {
             // Initialize the views
@@ -101,7 +91,7 @@ public class ItemsAdapter extends BaseAdapter {
             itemQuantity = view.findViewById(R.id.itemQuantity);
             itemCategory = view.findViewById(R.id.itemCategory);
             itemExpiryDate = view.findViewById(R.id.itemExpiryDate);
-            deleteItemIcon = view.findViewById(R.id.deleteItemIcon);
+            navigateToDetailsButton = view.findViewById(R.id.navigateToDetailsButton);
         }
     }
 

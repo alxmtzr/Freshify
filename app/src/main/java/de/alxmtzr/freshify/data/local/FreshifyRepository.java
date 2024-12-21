@@ -59,5 +59,13 @@ public interface FreshifyRepository {
      * @return a list of items that match the specified name.
      */
     List<ItemEntity> getItemsByName(String itemName);
+
+    /**
+     * Retrieves an item by its ID.
+     *
+     * @param itemId the ID of the item to retrieve.
+     * @return the item with the specified ID, or null if no such item exists.
+     */
+    ItemEntity getItemById(long itemId);
 }
 
