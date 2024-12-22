@@ -59,6 +59,7 @@
     <string name="expired_since_one_day">expired since %1$d day</string>
     <string name="expired_since_days">expired since %1$d days</string>
     <string name="expires_in_x_days">expires in x days</string>
+    <string name="expires_today">expires today</string>
     <string name="days_until_expiry">Set days for expiring items</string>
     <string name="_3">3</string>
 

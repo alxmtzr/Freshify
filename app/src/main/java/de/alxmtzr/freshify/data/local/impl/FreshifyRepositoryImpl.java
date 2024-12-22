@@ -141,7 +141,7 @@ public class FreshifyRepositoryImpl implements FreshifyRepository {
                 new String[]{"+" + daysUntilExpiry + " days"},
                 null,
                 null,
-                FreshifyDBHelper.FRESHIFY_COL_ITEM_EXPIRY_DATE + " DESC");
+                FreshifyDBHelper.FRESHIFY_COL_ITEM_EXPIRY_DATE + " ASC");
 
         if (cursor != null) {
             while (cursor.moveToNext()) {

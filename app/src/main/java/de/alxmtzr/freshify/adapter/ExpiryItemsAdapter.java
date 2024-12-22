@@ -70,6 +70,9 @@ public class ExpiryItemsAdapter extends BaseAdapter {
         long daysUntilExpiry = item.getExpiryDate().toEpochDay() - java.time.LocalDate.now().toEpochDay();
 
         // Set the expiry date text based on the days until expiry
+        if (daysUntilExpiry == 0) {
+            holder.expiryItemText.setText(context.getString(R.string.expires_today));
+        } else
         if (daysUntilExpiry == 1) {
             holder.expiryItemText.setText(
                     context.getString(R.string.expires_in_one_day, daysUntilExpiry)
