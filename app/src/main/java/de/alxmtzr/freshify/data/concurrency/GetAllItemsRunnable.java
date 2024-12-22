@@ -34,7 +34,11 @@ public class GetAllItemsRunnable implements Runnable {
 
     @Override
     public void run() {
-        List<ItemEntity> allItems = repository.getAllItems();
+        List<ItemEntity> allItems;
+        synchronized (repository) {
+            allItems = repository.getAllItems();
+        }
+
         if (allItems != null) {
             data.clear();
             data.addAll(allItems);

@@ -32,7 +32,10 @@ public class GetItemByIdRunnable implements Runnable{
 
     @Override
     public void run() {
-        ItemEntity item = repository.getItemById(id);
+        ItemEntity item;
+        synchronized (repository) {
+            item = repository.getItemById(id);
+        }
         updateUI(item);
     }
 

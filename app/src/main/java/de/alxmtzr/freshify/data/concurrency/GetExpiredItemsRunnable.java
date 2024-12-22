@@ -34,12 +34,17 @@ public class GetExpiredItemsRunnable implements Runnable {
 
     @Override
     public void run() {
-        List<ItemEntity> expiredItems = repository.getExpiredItems();
-        if (expiredItems != null) {
-            data.clear();
-            data.addAll(expiredItems);
+        List<ItemEntity> expiredItems;
+        synchronized (repository) {
+            expiredItems = repository.getExpiredItems();
+        }
 
-            // log expiring items
+        if (expiredItems != null) {
+            synchronized (data) {
+                data.clear();
+                data.addAll(expiredItems);
+            }
+            // Log items
             for (ItemEntity item : expiredItems) {
                 Log.i("GetExpiredItemsRunnable", "Expired item: " + item.getName());
             }
@@ -58,5 +63,6 @@ public class GetExpiredItemsRunnable implements Runnable {
             listView.post(() -> Toast.makeText(listView.getContext(), "Error fetching expired items.", Toast.LENGTH_SHORT).show());
         }
     }
+
 }
 

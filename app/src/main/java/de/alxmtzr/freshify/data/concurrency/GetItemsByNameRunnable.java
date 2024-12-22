@@ -31,7 +31,11 @@ public class GetItemsByNameRunnable implements Runnable {
 
     @Override
     public void run() {
-        List<ItemEntity> items = repository.getItemsByName(itemName);
+        List<ItemEntity> items;
+        synchronized (repository) {
+            items = repository.getItemsByName(itemName);
+        }
+
         if (items != null) {
             data.clear();
             data.addAll(items);

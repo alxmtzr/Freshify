@@ -23,14 +23,17 @@ public class DeleteItemRunnable implements Runnable {
 
     @Override
     public void run() {
-        long deletedRows = repository.deleteItem(itemId);
-        view.post(() -> {
-            if (deletedRows > 0) {
-                Toast.makeText(view.getContext(), "Item deleted successfully!", Toast.LENGTH_SHORT).show();
-                onDeleteSuccess.run(); // Execute success callback (e.g., finish activity)
-            } else {
-                Toast.makeText(view.getContext(), "Failed to delete item.", Toast.LENGTH_SHORT).show();
-            }
-        });
+        synchronized (repository) { // synchronize access to the repository
+            long deletedRows = repository.deleteItem(itemId);
+            view.post(() -> {
+                if (deletedRows > 0) {
+                    Toast.makeText(view.getContext(), "Item deleted successfully!", Toast.LENGTH_SHORT).show();
+                    onDeleteSuccess.run(); // Execute success callback (e.g., finish activity)
+                } else {
+                    Toast.makeText(view.getContext(), "Failed to delete item.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
+
 }

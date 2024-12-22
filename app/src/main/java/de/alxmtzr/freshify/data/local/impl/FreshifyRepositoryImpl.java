@@ -21,7 +21,7 @@ public class FreshifyRepositoryImpl implements FreshifyRepository {
     }
 
     @Override
-    public long deleteItem(long itemId) {
+    public synchronized long deleteItem(long itemId) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         long deletedRows = db.delete(
@@ -35,7 +35,7 @@ public class FreshifyRepositoryImpl implements FreshifyRepository {
     }
 
     @Override
-    public long insertItem(ItemEntity item) {
+    public synchronized long insertItem(ItemEntity item) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -53,7 +53,7 @@ public class FreshifyRepositoryImpl implements FreshifyRepository {
     }
 
     @Override
-    public List<ItemEntity> getAllItems() {
+    public synchronized List<ItemEntity> getAllItems() {
         List<ItemEntity> items = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
@@ -77,7 +77,7 @@ public class FreshifyRepositoryImpl implements FreshifyRepository {
     }
 
     @Override
-    public List<ItemEntity> getItemsByCategories(List<Integer> categoryIds) {
+    public synchronized List<ItemEntity> getItemsByCategories(List<Integer> categoryIds) {
         List<ItemEntity> items = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
@@ -109,7 +109,7 @@ public class FreshifyRepositoryImpl implements FreshifyRepository {
     }
 
     @Override
-    public List<ItemEntity> getExpiredItems() {
+    public synchronized List<ItemEntity> getExpiredItems() {
         List<ItemEntity> items = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query(
@@ -131,7 +131,7 @@ public class FreshifyRepositoryImpl implements FreshifyRepository {
     }
 
     @Override
-    public List<ItemEntity> getItemsExpiringSoon(int daysUntilExpiry) {
+    public synchronized List<ItemEntity> getItemsExpiringSoon(int daysUntilExpiry) {
         List<ItemEntity> items = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query(
@@ -153,7 +153,7 @@ public class FreshifyRepositoryImpl implements FreshifyRepository {
     }
 
     @Override
-    public List<ItemEntity> getItemsByName(String itemName) {
+    public synchronized List<ItemEntity> getItemsByName(String itemName) {
         List<ItemEntity> items = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query(
@@ -175,7 +175,7 @@ public class FreshifyRepositoryImpl implements FreshifyRepository {
     }
 
     @Override
-    public ItemEntity getItemById(long itemId) {
+    public synchronized ItemEntity getItemById(long itemId) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         ItemEntity item = null;
 

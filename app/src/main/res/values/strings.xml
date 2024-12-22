@@ -56,8 +56,8 @@
     <string name="navigate_to_details">navigate to details</string>
     <string name="expires_in_one_day">expires in %1$d day</string>
     <string name="expires_in_multiple_days">expires in %1$d days</string>
-    <string name="expired_since_one_day">expires since %1$d day</string>
-    <string name="expired_since_days">expires since %1$d days</string>
+    <string name="expired_since_one_day">expired since %1$d day</string>
+    <string name="expired_since_days">expired since %1$d days</string>
     <string name="expires_in_x_days">expires in x days</string>
     <string name="days_until_expiry">Set days for expiring items</string>
     <string name="_3">3</string>

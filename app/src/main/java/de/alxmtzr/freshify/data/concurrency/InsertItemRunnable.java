@@ -30,19 +30,22 @@ public class InsertItemRunnable implements Runnable {
 
     @Override
     public void run() {
-        long id = repository.insertItem(newItem);
+        long id;
+        synchronized (repository) {
+            id = repository.insertItem(newItem);
+        }
+
         if (id != -1) {
             newItem.setId(id);
-            data.add(newItem);
+            synchronized (data) {
+                data.add(newItem);
+            }
 
-            // post UI update
             listView.post(adapter::notifyDataSetChanged);
         } else {
-            // post error message
             listView.post(() -> Toast.makeText(listView.getContext(), "Error inserting new item.", Toast.LENGTH_SHORT).show());
         }
     }
-
 }
 
 

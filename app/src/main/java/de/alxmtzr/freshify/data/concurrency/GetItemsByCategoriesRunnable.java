@@ -31,19 +31,24 @@ public class GetItemsByCategoriesRunnable implements Runnable {
 
     @Override
     public void run() {
-        List<ItemEntity> filteredItems = repository.getItemsByCategories(categoryIds);
-        if (filteredItems != null) {
-            data.clear();
-            data.addAll(filteredItems);
+        List<ItemEntity> filteredItems;
+        synchronized (repository) {
+            filteredItems = repository.getItemsByCategories(categoryIds);
+        }
 
-            // post UI update
+        if (filteredItems != null) {
+            synchronized (data) {
+                data.clear();
+                data.addAll(filteredItems);
+            }
+
             listView.post(adapter::notifyDataSetChanged);
             Log.i("GetItemsByCategoriesRunnable", "Filtered by " + categoryIds.size() + " categories");
         } else {
-            // post error message
             listView.post(() -> Toast.makeText(listView.getContext(), "Error filtering items.", Toast.LENGTH_SHORT).show());
             Log.i("GetItemsByCategoriesRunnable", "Error filtering items");
         }
     }
+
 }
 
