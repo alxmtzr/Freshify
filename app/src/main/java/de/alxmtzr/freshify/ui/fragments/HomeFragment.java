@@ -79,7 +79,6 @@ public class HomeFragment extends Fragment {
                 new ArrayList<>(),
                 ExpiryItemsAdapter.TYPE_EXPIRED);
         expiredItemsListView.setAdapter(expiredItemsAdapter);
-        loadExpiredItems();
     }
 
     private void initExpiringCardView(@NonNull View view) {
@@ -90,7 +89,6 @@ public class HomeFragment extends Fragment {
                 new ArrayList<>(),
                 ExpiryItemsAdapter.TYPE_EXPIRING);
         expiringItemsListView.setAdapter(expiringItemsAdapter);
-        loadExpiringItems();
     }
 
     @Override

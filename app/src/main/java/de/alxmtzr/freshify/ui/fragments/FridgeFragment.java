@@ -76,9 +76,6 @@ public class FridgeFragment extends Fragment {
 
         initSearchView(view);
         initCategoryChips(view);
-
-        // load all items
-        resetFilter();
     }
 
     @Override
