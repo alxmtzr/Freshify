@@ -74,5 +74,9 @@
     <string name="is_expiring_soon">" is expiring soon."</string>
     <string name="multiple_items_expiring_soon">Multiple items expiring soon!</string>
     <string name="items_are_expiring_soon_check_your_list">" items are expiring soon. Check your list."</string>
+    <string name="permission_required">Permission required</string>
+    <string name="please_grant_the_notification_permission_if_you_want_to_receive_notifications_for_expiring_or_expired_items">Please grant the notification permission if you want to receive notifications for expiring or expired items.</string>
+    <string name="open_settings">Open settings</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

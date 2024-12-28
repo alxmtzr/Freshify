@@ -1,10 +1,14 @@
 package de.alxmtzr.freshify.notification;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 import androidx.work.Worker;
@@ -38,20 +42,25 @@ public class NotificationWorker extends Worker {
     public Result doWork() {
         Log.d("NotificationWorker", "Worker started");
 
-        SharedPreferences preferences = getApplicationContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        int daysUntilExpiry = preferences.getInt(PREF_DAYS_UNTIL_EXPIRY, 3);
-        Log.d("NotificationWorker", "Days until expiry: " + daysUntilExpiry);
+        // check permissions
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
+                && ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+                Log.d("NotificationWorker", "Permission missing. Skip notification.");
+                return Result.success();
+            }
+
+
+        SharedPreferences prefs = getApplicationContext().getSharedPreferences(PREF_NAME, 0);
+        int daysUntilExpiry = prefs.getInt(PREF_DAYS_UNTIL_EXPIRY, 3);
 
         List<ItemEntity> expiredItems = repository.getExpiredItems();
         List<ItemEntity> expiringSoonItems = repository.getItemsExpiringSoon(daysUntilExpiry);
 
-        Log.d("NotificationWorker", "Expired items: " + expiredItems.size());
-        Log.d("NotificationWorker", "Expiring soon items: " + expiringSoonItems.size());
-
         notificationService.notifyExpiredItems(expiredItems);
         notificationService.notifyExpiringItems(expiringSoonItems);
 
-//        scheduleNextRun();
+        // scheduleNextRun(); // only for testing purposes
 
         return Result.success();
     }

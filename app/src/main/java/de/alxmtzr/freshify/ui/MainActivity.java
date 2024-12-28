@@ -1,8 +1,18 @@
 package de.alxmtzr.freshify.ui;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.util.Log;
 import android.view.Window;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
@@ -26,6 +36,13 @@ import de.alxmtzr.freshify.ui.fragments.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final ActivityResultLauncher<String> requestNotificationPermission =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (!isGranted) {
+                    showPermissionDeniedDialog();
+                }
+            });
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,9 +51,88 @@ public class MainActivity extends AppCompatActivity {
         initToolbar();
         initBottomNavBar(savedInstanceState);
 
+        // start worker to schedule notifications (if no permission, worker skips notifications)
         NotificationScheduler.scheduleNotifications(this);
+        requestNotificationPermissionIfNeeded();
 
-//        insertTestData();
+        // insertTestData(); // only for test purposes
+    }
+
+    private void requestNotificationPermissionIfNeeded() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                requestNotificationPermission.launch(Manifest.permission.POST_NOTIFICATIONS);
+            } else {
+                Log.d("MainActivity", "Notification permission already granted");
+            }
+        }
+    }
+
+    private void showPermissionDeniedDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.permission_required)
+                .setMessage(R.string.please_grant_the_notification_permission_if_you_want_to_receive_notifications_for_expiring_or_expired_items)
+                .setPositiveButton(R.string.open_settings, (dialog, which) -> openAppSettings())
+                .setNegativeButton(R.string.cancel, (dialog, which) -> dialog.dismiss())
+                .show();
+    }
+
+    private void openAppSettings() {
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        Uri uri = Uri.fromParts("package", getPackageName(), null);
+        intent.setData(uri);
+        startActivity(intent);
+    }
+
+    private void initToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbarItemDetails);
+        setSupportActionBar(toolbar);
+
+        // Set status bar color
+        Window window = getWindow();
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.md_theme_primaryContainer));
+    }
+
+    private void initBottomNavBar(Bundle savedInstanceState) {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+
+        Fragment homeFragment = new HomeFragment();
+        Fragment fridgeFragment = new FridgeFragment();
+        Fragment settingsFragment = new SettingsFragment();
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container, homeFragment, "home")
+                    .commit();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container, fridgeFragment, "fridge")
+                    .hide(fridgeFragment)
+                    .commit();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container, settingsFragment, "settings")
+                    .hide(settingsFragment)
+                    .commit();
+        }
+
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            Fragment selectedFragment = null;
+
+            if (item.getItemId() == R.id.home) {
+                selectedFragment = homeFragment;
+            } else if (item.getItemId() == R.id.fridge) {
+                selectedFragment = fridgeFragment;
+            } else if (item.getItemId() == R.id.settings) {
+                selectedFragment = settingsFragment;
+            }
+
+            if (selectedFragment != null) {
+                for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+                    getSupportFragmentManager().beginTransaction().hide(fragment).commit();
+                }
+                getSupportFragmentManager().beginTransaction().show(selectedFragment).commit();
+            }
+            return true;
+        });
     }
 
     // only for test purposes
@@ -109,45 +205,5 @@ public class MainActivity extends AppCompatActivity {
         for (ItemEntity item : exampleItems) {
             repository.insertItem(item);
         }
-    }
-
-    private void initToolbar() {
-        Toolbar toolbar = findViewById(R.id.toolbarItemDetails);
-        setSupportActionBar(toolbar);
-
-        // set status bar color
-        Window window = getWindow();
-        window.setStatusBarColor(ContextCompat.getColor(this, R.color.md_theme_primaryContainer));
-    }
-
-    private void initBottomNavBar(Bundle savedInstanceState) {
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        // set home fragment as default
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, new HomeFragment())
-                    .commit();
-        }
-
-        bottomNavigationView.setOnItemSelectedListener(item -> {
-            Fragment selectedFragment = null;
-
-            // determine which fragment to show
-            if (item.getItemId() == R.id.home) {
-                selectedFragment = new HomeFragment();
-            } else if (item.getItemId() == R.id.fridge) {
-                selectedFragment = new FridgeFragment();
-            } else if (item.getItemId() == R.id.settings) {
-                selectedFragment = new SettingsFragment();
-            }
-
-            // show the selected fragment
-            if (selectedFragment != null) {
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, selectedFragment)
-                        .commit();
-            }
-            return true;
-        });
     }
 }

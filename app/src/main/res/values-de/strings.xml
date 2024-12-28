@@ -74,4 +74,9 @@
     <string name="is_expiring_soon">" läuft bald ab."</string>
     <string name="multiple_items_expiring_soon">Mehrere Artikel laufen bald ab!</string>
     <string name="items_are_expiring_soon_check_your_list">" Artikel laufen bald ab. Überprüfe deine Liste."</string>
+    <string name="permission_required">Berechtigung erforderlich</string>
+    <string name="please_grant_the_notification_permission_if_you_want_to_receive_notifications_for_expiring_or_expired_items">Bitte erteilen Sie die Berechtigung, wenn Sie Benachrichtigungen zu ablaufenden oder abgelaufenen Artikeln erhalten möchten.</string>
+    <string name="open_settings">Einstellungen öffnen</string>
+    <string name="cancel">Abbrechen</string>
+
 </resources>
