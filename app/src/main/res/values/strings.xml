@@ -62,5 +62,8 @@
     <string name="expires_today">expires today</string>
     <string name="days_until_expiry">Set days for expiring items</string>
     <string name="_3">3</string>
+    <string name="how_long_does">"How long does "</string>
+    <string name="last">" last?"</string>
+    <string name="please_enter_an_item_name">Please enter an item name.</string>
 
 </resources>

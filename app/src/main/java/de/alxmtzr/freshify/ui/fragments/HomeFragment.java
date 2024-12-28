@@ -3,7 +3,10 @@ package de.alxmtzr.freshify.ui.fragments;
 import static de.alxmtzr.freshify.ui.fragments.SettingsFragment.PREF_DAYS_UNTIL_EXPIRY;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +45,8 @@ import de.alxmtzr.freshify.data.model.ItemEntity;
 
 public class HomeFragment extends Fragment {
 
+    private static final String GOOGLE_SEARCH_URL = "https://www.google.com/search?q=";
+
     private int daysUntilExpiry;
 
     private ListView expiringItemsListView;
@@ -60,6 +66,7 @@ public class HomeFragment extends Fragment {
 
         initCategoryDropDown(view);
         initExpiryDateField(view);
+        initWebSearchButton(view);
         initSaveItemButton(view);
         initExpiringCardView(view);
         initExpiredCardView(view);
@@ -263,5 +270,31 @@ public class HomeFragment extends Fragment {
         ((TextInputEditText) view.findViewById(R.id.expiryDateEditText)).setText("");
         ((AutoCompleteTextView) view.findViewById(R.id.categoryDropdownMenu)).setText("");
         ((TextInputEditText) view.findViewById(R.id.commentEditText)).setText("");
+    }
+
+    /** OnClick Listener for web search button */
+    public void initWebSearchButton(View view) {
+        ImageButton webSearchButton = view.findViewById(R.id.webSearchIcon);
+        webSearchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextInputEditText itemNameEditText = view.findViewById(R.id.itemNameEditText);
+                String itemName = itemNameEditText.getText().toString().trim();
+
+                if (itemName.isEmpty()) {
+                    Toast.makeText(requireContext(), getString(R.string.please_enter_an_item_name), Toast.LENGTH_SHORT).show();
+                } else {
+                    startWebSearch(requireContext(), itemName);
+                }
+            }
+        });
+    }
+
+    /** start web search for item */
+    private void startWebSearch(Context context, String itemName) {
+        String query = getString(R.string.how_long_does) + itemName + getString(R.string.last);
+        String url = GOOGLE_SEARCH_URL + Uri.encode(query);
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        context.startActivity(intent);
     }
 }

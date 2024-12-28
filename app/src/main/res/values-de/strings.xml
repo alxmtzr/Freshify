@@ -62,5 +62,8 @@
     <string name="expires_today">läuft heute ab</string>
     <string name="days_until_expiry">Tage für bald abgelaufene Artikel</string>
     <string name="_3">3</string>
+    <string name="how_long_does">"Wie lange ist "</string>
+    <string name="last">" haltbar?"</string>
+    <string name="please_enter_an_item_name">Bitte einen Lebensmittelnamen eingeben.</string>
 
 </resources>
