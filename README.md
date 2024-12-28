@@ -1,6 +1,8 @@
 # Freshify
 
-Freshify is a native Android application designed to help users efficiently manage their fridge contents. With features like expiration date reminders, item categorization, and multilingual support, Freshify offers a practical and user-friendly solution for keeping groceries organized.
+Freshify is a native Android application designed to help users efficiently manage their fridge contents. 
+With features like adding items to your fridge, expiration date reminders, and item categorization 
+Freshify offers a practical and user-friendly solution for keeping groceries organized.
 
 ---
 
