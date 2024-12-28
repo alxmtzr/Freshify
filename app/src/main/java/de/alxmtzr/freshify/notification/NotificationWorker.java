@@ -65,7 +65,8 @@ public class NotificationWorker extends Worker {
         return Result.success();
     }
 
-    /** only for testing purposes */
+    /** only for testing purposes
+     * sends notifications every minute */
     private void scheduleNextRun() {
         OneTimeWorkRequest workRequest = new OneTimeWorkRequest.Builder(NotificationWorker.class)
                 .setInitialDelay(1, TimeUnit.MINUTES)
