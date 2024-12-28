@@ -17,10 +17,38 @@
         android:theme="@style/ThemeOverlay.MaterialComponents.Toolbar.Primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/freshify"
-        app:titleCentered="true"
-        app:titleTextColor="@color/md_theme_onPrimaryContainer" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- container for logo and title -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- logo -->
+            <ImageView
+                android:id="@+id/toolbar_logo"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_logo" />
+
+            <!-- title -->
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/freshify"
+                android:textColor="@color/md_theme_onPrimaryContainer"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+
+
 
     <!-- Fragment Container -->
     <FrameLayout

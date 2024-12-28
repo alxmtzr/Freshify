@@ -87,6 +87,11 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbarItemDetails);
         setSupportActionBar(toolbar);
 
+        // remove default title from toolbar
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+
         // Set status bar color
         Window window = getWindow();
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.md_theme_primaryContainer));
