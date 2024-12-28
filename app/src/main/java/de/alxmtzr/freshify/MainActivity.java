@@ -1,4 +1,4 @@
-package de.alxmtzr.freshify.ui;
+package de.alxmtzr.freshify;
 
 import android.Manifest;
 import android.content.Intent;
@@ -24,7 +24,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.alxmtzr.freshify.R;
 import de.alxmtzr.freshify.data.local.FreshifyRepository;
 import de.alxmtzr.freshify.data.local.impl.FreshifyDBHelper;
 import de.alxmtzr.freshify.data.local.impl.FreshifyRepositoryImpl;

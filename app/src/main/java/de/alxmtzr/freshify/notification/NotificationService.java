@@ -14,7 +14,7 @@ import java.util.List;
 
 import de.alxmtzr.freshify.R;
 import de.alxmtzr.freshify.data.model.ItemEntity;
-import de.alxmtzr.freshify.ui.MainActivity;
+import de.alxmtzr.freshify.MainActivity;
 
 public class NotificationService {
 
