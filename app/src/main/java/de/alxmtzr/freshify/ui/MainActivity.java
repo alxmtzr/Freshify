@@ -19,6 +19,7 @@ import de.alxmtzr.freshify.data.local.FreshifyRepository;
 import de.alxmtzr.freshify.data.local.impl.FreshifyDBHelper;
 import de.alxmtzr.freshify.data.local.impl.FreshifyRepositoryImpl;
 import de.alxmtzr.freshify.data.model.ItemEntity;
+import de.alxmtzr.freshify.notification.NotificationScheduler;
 import de.alxmtzr.freshify.ui.fragments.FridgeFragment;
 import de.alxmtzr.freshify.ui.fragments.HomeFragment;
 import de.alxmtzr.freshify.ui.fragments.SettingsFragment;
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
         initToolbar();
         initBottomNavBar(savedInstanceState);
+
+        NotificationScheduler.scheduleNotifications(this);
 
 //        insertTestData();
     }
