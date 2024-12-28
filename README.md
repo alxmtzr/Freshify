@@ -77,21 +77,21 @@ The Settings Tab provides options to customize and manage the app:
 
 ### 🏠 Home Tab
 - **Add New Items**:
-  <img src="screenshots/home_1.png" alt="Add New Items" width="400"/>
+  <img src="screenshots/home_1.png" alt="Add New Items" width="200"/>
 - **Expiring and Expired Items**:
-  <img src="screenshots/home_2.png" alt="Expiring Items" width="400"/>
+  <img src="screenshots/home_2.png" alt="Expiring Items" width="200"/>
 
 ### 🥗 My Fridge Tab
-<img src="screenshots/my_fridge.png" alt="My Fridge Tab" width="400"/>
+<img src="screenshots/my_fridge.png" alt="My Fridge Tab" width="200"/>
 
 ### ⚙️ Settings Tab
-<img src="screenshots/settings.png" alt="Settings Tab" width="400"/>
+<img src="screenshots/settings.png" alt="Settings Tab" width="200"/>
 
 ### 🌙 Dark Mode
-<img src="screenshots/dark_mode.png" alt="Dark Mode" width="400"/>
+<img src="screenshots/dark_mode.png" alt="Dark Mode" width="200"/>
 
 ### 📲 Notifications
-<img src="screenshots/notifications.png" alt="Notifications" width="400"/>
+<img src="screenshots/notifications.png" alt="Notifications" width="200"/>
 
 
 ---
