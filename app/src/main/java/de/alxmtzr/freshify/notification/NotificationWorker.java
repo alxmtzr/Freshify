@@ -5,10 +5,13 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import de.alxmtzr.freshify.data.local.FreshifyRepository;
 import de.alxmtzr.freshify.data.local.impl.FreshifyDBHelper;
@@ -48,7 +51,18 @@ public class NotificationWorker extends Worker {
         notificationService.notifyExpiredItems(expiredItems);
         notificationService.notifyExpiringItems(expiringSoonItems);
 
+//        scheduleNextRun();
+
         return Result.success();
+    }
+
+    /** only for testing purposes */
+    private void scheduleNextRun() {
+        OneTimeWorkRequest workRequest = new OneTimeWorkRequest.Builder(NotificationWorker.class)
+                .setInitialDelay(1, TimeUnit.MINUTES)
+                .build();
+
+        WorkManager.getInstance(getApplicationContext()).enqueue(workRequest);
     }
 
 }

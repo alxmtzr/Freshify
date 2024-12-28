@@ -3,7 +3,9 @@ package de.alxmtzr.freshify.notification;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 
 import androidx.core.app.NotificationCompat;
@@ -12,6 +14,7 @@ import java.util.List;
 
 import de.alxmtzr.freshify.R;
 import de.alxmtzr.freshify.data.model.ItemEntity;
+import de.alxmtzr.freshify.ui.MainActivity;
 
 public class NotificationService {
 
@@ -97,9 +100,22 @@ public class NotificationService {
                 .setSmallIcon(android.R.drawable.ic_popup_reminder)
                 .setContentTitle(title)
                 .setContentText(message)
+                .setContentIntent(createContentIntent())
                 .setAutoCancel(true)
                 .build();
         notificationManager.notify(id, notification);
+    }
+
+    private PendingIntent createContentIntent() {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        return PendingIntent.getActivity(
+                context,
+                0,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+        );
     }
 }
 

@@ -13,7 +13,7 @@ public class NotificationScheduler {
         PeriodicWorkRequest notificationRequest =
                 new PeriodicWorkRequest.Builder(
                         NotificationWorker.class,
-                        1,
+                        15,
                         TimeUnit.MINUTES
                 ).build();
 
