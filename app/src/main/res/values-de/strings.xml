@@ -65,5 +65,13 @@
     <string name="how_long_does">"Wie lange ist "</string>
     <string name="last">" haltbar?"</string>
     <string name="please_enter_an_item_name">Bitte einen Lebensmittelnamen eingeben.</string>
-
+    <string name="item_expired">Artikel abgelaufen!</string>
+    <string name="the_item">"Der Artikel "</string>
+    <string name="has_expired">" ist abgelaufen."</string>
+    <string name="multiple_items_expired">Mehrere Artikel abgelaufen!</string>
+    <string name="items_have_expired_check_your_list">" Artikel sind abgelaufen. Überprüfe deine Liste."</string>
+    <string name="item_expiring_soon">Artikel läuft bald ab!</string>
+    <string name="is_expiring_soon">" läuft bald ab."</string>
+    <string name="multiple_items_expiring_soon">Mehrere Artikel laufen bald ab!</string>
+    <string name="items_are_expiring_soon_check_your_list">" Artikel laufen bald ab. Überprüfe deine Liste."</string>
 </resources>

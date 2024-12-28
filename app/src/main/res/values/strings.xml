@@ -65,5 +65,14 @@
     <string name="how_long_does">"How long does "</string>
     <string name="last">" last?"</string>
     <string name="please_enter_an_item_name">Please enter an item name.</string>
+    <string name="item_expired">Item expired!</string>
+    <string name="the_item">"The item "</string>
+    <string name="has_expired">" has expired."</string>
+    <string name="multiple_items_expired">Multiple items expired!</string>
+    <string name="items_have_expired_check_your_list">" items have expired. Check your list."</string>
+    <string name="item_expiring_soon">Item expiring soon!</string>
+    <string name="is_expiring_soon">" is expiring soon."</string>
+    <string name="multiple_items_expiring_soon">Multiple items expiring soon!</string>
+    <string name="items_are_expiring_soon_check_your_list">" items are expiring soon. Check your list."</string>
 
 </resources>
