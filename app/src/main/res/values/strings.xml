@@ -60,7 +60,7 @@
     <string name="expired_since_days">expired since %1$d days</string>
     <string name="expires_in_x_days">expires in x days</string>
     <string name="expires_today">expires today</string>
-    <string name="days_until_expiry">Set days for expiring items</string>
+    <string name="days_until_expiry">Days to Show Expiring Items</string>
     <string name="_3">3</string>
     <string name="how_long_does">"How long does "</string>
     <string name="last">" last?"</string>
@@ -78,5 +78,6 @@
     <string name="please_grant_the_notification_permission_if_you_want_to_receive_notifications_for_expiring_or_expired_items">Please grant the notification permission if you want to receive notifications for expiring or expired items.</string>
     <string name="open_settings">Open settings</string>
     <string name="cancel">Cancel</string>
+    <string name="manage_notification_permissions">Manage Notification Permissions</string>
 
 </resources>

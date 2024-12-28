@@ -60,7 +60,7 @@
     <string name="expired_since_days">abgelaufen seit %1$d Tagen</string>
     <string name="expires_in_x_days">läuft in x Tagen ab</string>
     <string name="expires_today">läuft heute ab</string>
-    <string name="days_until_expiry">Tage für bald abgelaufene Artikel</string>
+    <string name="days_until_expiry">Zeitraum für ablaufende Artikel (Tage)</string>
     <string name="_3">3</string>
     <string name="how_long_does">"Wie lange ist "</string>
     <string name="last">" haltbar?"</string>
@@ -78,5 +78,6 @@
     <string name="please_grant_the_notification_permission_if_you_want_to_receive_notifications_for_expiring_or_expired_items">Bitte erteilen Sie die Berechtigung, wenn Sie Benachrichtigungen zu ablaufenden oder abgelaufenen Artikeln erhalten möchten.</string>
     <string name="open_settings">Einstellungen öffnen</string>
     <string name="cancel">Abbrechen</string>
+    <string name="manage_notification_permissions">Berechtigungen für Benachrichtigungen verwalten</string>
 
 </resources>

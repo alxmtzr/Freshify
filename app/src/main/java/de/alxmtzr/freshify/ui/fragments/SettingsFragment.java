@@ -1,15 +1,19 @@
 package de.alxmtzr.freshify.ui.fragments;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -60,5 +64,23 @@ public class SettingsFragment extends Fragment {
                 preferences.edit().putInt(PREF_DAYS_UNTIL_EXPIRY, seekBar.getProgress()).apply();
             }
         });
+
+        ImageButton openSettingsButton = view.findViewById(R.id.manageNotificationPermissionsButton);
+        openSettingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Open the notification settings
+                openAppSettings();
+            }
+        });
     }
+
+    private void openAppSettings() {
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        Uri uri = Uri.fromParts("package", requireContext().getPackageName(), null);
+        intent.setData(uri);
+        startActivity(intent);
+    }
+
+
 }
