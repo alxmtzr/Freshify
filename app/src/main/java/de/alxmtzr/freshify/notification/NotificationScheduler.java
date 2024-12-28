@@ -13,8 +13,8 @@ public class NotificationScheduler {
         PeriodicWorkRequest notificationRequest =
                 new PeriodicWorkRequest.Builder(
                         NotificationWorker.class,
-                        1,
-                        TimeUnit.DAYS
+                        15,
+                        TimeUnit.MINUTES
                 ).build();
 
         WorkManager.getInstance(context).enqueue(notificationRequest);
