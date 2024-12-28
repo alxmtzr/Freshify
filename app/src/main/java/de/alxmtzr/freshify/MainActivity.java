@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         NotificationScheduler.scheduleNotifications(this);
         requestNotificationPermissionIfNeeded();
 
-//        insertTestData(); // only for test purposes
+        insertTestData(); // only for test purposes
     }
 
     private void requestNotificationPermissionIfNeeded() {

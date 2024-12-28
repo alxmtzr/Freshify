@@ -99,11 +99,68 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+
+        saveFieldValues();
+    }
+
+    private void saveFieldValues() {
+        SharedPreferences prefs = getActivity().getSharedPreferences("prefs_freshify", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+
+        TextInputEditText itemNameEditText = requireView().findViewById(R.id.itemNameEditText);
+        String itemName = itemNameEditText.getText().toString();
+        editor.putString("itemName", itemName);
+
+        TextInputEditText itemQuantityEditText = requireView().findViewById(R.id.itemQuantityEditText);
+        String itemQuantity = itemQuantityEditText.getText().toString();
+        editor.putString("itemQuantity", itemQuantity);
+
+        AutoCompleteTextView categoryDropdownMenu = requireView().findViewById(R.id.categoryDropdownMenu);
+        String category = categoryDropdownMenu.getText().toString();
+        editor.putString("category", category);
+
+        TextInputEditText expiryDateEditText = requireView().findViewById(R.id.expiryDateEditText);
+        String expiryDate = expiryDateEditText.getText().toString();
+        editor.putString("expiryDate", expiryDate);
+
+        TextInputEditText commentEditText = requireView().findViewById(R.id.commentEditText);
+        String comment = commentEditText.getText().toString();
+        editor.putString("comment", comment);
+
+        editor.apply();
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
+
+        // fill in the fields with the saved data
+        fillInFields();
+
         loadExpiringItems();
         loadExpiredItems();
         getDaysUntilExpiry(requireView());
+    }
+
+    private void fillInFields() {
+        SharedPreferences prefs = getActivity().getSharedPreferences("prefs_freshify", Context.MODE_PRIVATE);
+
+        TextInputEditText itemNameEditText = requireView().findViewById(R.id.itemNameEditText);
+        itemNameEditText.setText(prefs.getString("itemName", ""));
+
+        TextInputEditText itemQuantityEditText = requireView().findViewById(R.id.itemQuantityEditText);
+        itemQuantityEditText.setText(prefs.getString("itemQuantity", ""));
+
+        AutoCompleteTextView categoryDropdownMenu = requireView().findViewById(R.id.categoryDropdownMenu);
+        categoryDropdownMenu.setText(prefs.getString("category", ""));
+
+        TextInputEditText expiryDateEditText = requireView().findViewById(R.id.expiryDateEditText);
+        expiryDateEditText.setText(prefs.getString("expiryDate", ""));
+
+        TextInputEditText commentEditText = requireView().findViewById(R.id.commentEditText);
+        commentEditText.setText(prefs.getString("comment", ""));
     }
 
     private void loadExpiringItems() {
